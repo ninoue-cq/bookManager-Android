@@ -26,54 +26,54 @@ public class BookListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_list);
+    setContentView(R.layout.activity_book_list);
 
-        ListView myListView = (ListView) findViewById(R.id.myListView);
+    ListView myListView = (ListView) findViewById(R.id.myListView);
 
-        // データを準備
-        ArrayList<User> users = new ArrayList<>();
+    // データを準備
+    ArrayList<User> users = new ArrayList<>();
 
-        int[] icons = {
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher
-        };
+    int[] icons = {
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher
+    };
 
-        String[] titles = {
-                "book1",
-                "book2",
-                "book3"
-        };
+    String[] titles = {
+            "book1",
+            "book2",
+            "book3"
+    };
 
-        String[] prices = {
-                "1200",
-                "1500",
-                "1600"
-        };
+    String[] prices = {
+            "1200",
+            "1500",
+            "1600"
+    };
 
-        String[] dates = {
-                "2014年 7月20日 ",
-                "2014年 8月20日 ",
-                "2014年 9月20日 "
-        };
-        for (int i = 0; i < icons.length; i++) {
-            User user = new User();
-            user.setIcon(BitmapFactory.decodeResource(
-                    getResources(),
-                    icons[i]
-            ));
-            user.setTitle(titles[i]);
-            user.setPrice(prices[i]);
-            user.setDate(dates[i]);
-            users.add(user);
-        }
-
-        // Adapter - ArrayAdapter - UserAdapter
-        UserAdapter adapter = new UserAdapter(this, 0, users);
-
-        // ListViewに表示
-        myListView.setAdapter(adapter);
+    String[] dates = {
+            "2014年 7月20日 ",
+            "2014年 8月20日 ",
+            "2014年 9月20日 "
+    };
+    for (int i = 0; i < icons.length; i++) {
+        User user = new User();
+        user.setIcon(BitmapFactory.decodeResource(
+                getResources(),
+                icons[i]
+        ));
+        user.setTitle(titles[i]);
+        user.setPrice(prices[i]);
+        user.setDate(dates[i]);
+        users.add(user);
     }
+
+    // Adapter - ArrayAdapter - UserAdapter
+    UserAdapter adapter = new UserAdapter(this, 0, users);
+
+    // ListViewに表示
+    myListView.setAdapter(adapter);
+}
 
     public class UserAdapter extends ArrayAdapter<User> {
 
