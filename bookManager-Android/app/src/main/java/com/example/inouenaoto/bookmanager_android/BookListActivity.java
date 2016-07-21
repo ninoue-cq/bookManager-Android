@@ -149,4 +149,12 @@ public class BookListActivity extends AppCompatActivity {
         private String date;
     }
 
+    /*セルから遷移するメソッド
+    @Override
+    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+        ここでデータを受けわたす処理と遷移の処理を行う
+    }
+    */
+
+
 }
