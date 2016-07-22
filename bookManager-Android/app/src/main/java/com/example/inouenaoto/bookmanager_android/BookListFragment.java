@@ -59,14 +59,14 @@ public class BookListFragment extends Fragment {
         // Required empty public constructor
     }
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-        ListView myListView = (ListView) findViewById(R.id.myBookListView);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v= inflater.inflate(R.layout.fragment_book_list, container, false);
+
+        ListView myListView = (ListView) v.findViewById(R.id.myBookListView);
 
         // データを準備
         ArrayList<User> users = new ArrayList<>();
@@ -107,17 +107,12 @@ public class BookListFragment extends Fragment {
         }
 
         // Adapter - ArrayAdapter - UserAdapter
-        UserAdapter adapter = new UserAdapter(this, 0, users);
+        UserAdapter adapter = new UserAdapter(getActivity(), 0, users);
 
         // ListViewに表示
         myListView.setAdapter(adapter);
-    }
+        return v;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_list, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -127,16 +122,6 @@ public class BookListFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
     @Override
     public void onDetach() {
@@ -217,6 +202,7 @@ public class BookListFragment extends Fragment {
         private String price;
         private String date;
     }
+
 
     /**
      * This interface must be implemented by activities that contain this
