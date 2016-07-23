@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".BookAddActivity" />
         <activity android:name=".AccountLoginActivity" />
-        <activity android:name=".AccountSettingActivity"></activity>
+        <activity android:name=".AccountSettingActivity" />
+        <activity android:name=".BookEditActivity"></activity>
     </application>
 
 </manifest>
