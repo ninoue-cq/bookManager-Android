@@ -25,26 +25,6 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
     //タブが選択されたとき
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 
-        if (mFragment == null) {
-            mFragment = Fragment.instantiate(mActivity, mClass.getName());
-            FragmentManager fm = mActivity.getFragmentManager();
-            fm.beginTransaction().add(R.id.container, mFragment, mTag).commit();
-        } else {
-            if (mFragment.isDetached()) {
-                FragmentManager fm = mActivity.getFragmentManager();
-                fm.beginTransaction().attach(mFragment).commit();
-            }
-
-        }
-    }
-
-    //タブの選択が解除されたとき
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-/*        if (mFragment != null) {
-            FragmentManager fm = mActivity.getFragmentManager();
-            fm.beginTransaction().detach(mFragment).commit();
-        }
-*/
         if (mTag == "tag1") {
             Fragment listFragment = new BookListFragment();
             FragmentManager manager = mActivity.getFragmentManager();
@@ -59,7 +39,16 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
             transaction.commit();
         }
     }
-    //選択されたタブが選択されたとき
+
+    //タブの選択が解除されたとき
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+        if (mFragment != null) {
+            FragmentManager fm = mActivity.getFragmentManager();
+            fm.beginTransaction().detach(mFragment).commit();
+        }
+    }
+
+    //選択されているタブが選択されたとき
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
     }
 }
