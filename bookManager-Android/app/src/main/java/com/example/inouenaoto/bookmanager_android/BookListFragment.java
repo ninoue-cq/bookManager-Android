@@ -2,6 +2,7 @@ package com.example.inouenaoto.bookmanager_android;
 
 import android.app.ListFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -10,11 +11,14 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 
 public class BookListFragment extends Fragment  {
@@ -30,6 +34,9 @@ public class BookListFragment extends Fragment  {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_book_list, container, false);
         ListView myListView = (ListView) v.findViewById(R.id.myBookListView);
+
+      //  myListView.setOnItemClickListener(this);
+
 
         // データを準備
         ArrayList<User> users = new ArrayList<>();
@@ -74,6 +81,23 @@ public class BookListFragment extends Fragment  {
 
         // ListViewに表示
         myListView.setAdapter(adapter);
+
+        // Event
+         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+             Intent intent = new Intent(getActivity(), BookEditActivity.class);
+   /*       // clickされたpositionのtextとphotoのID
+              String selectedText = scenes[position];
+             int selectedPhoto = photos[position];
+            // インテントにセット
+              intent.putExtra("Text", selectedText);
+              intent.putExtra("Photo", selectedPhoto);
+              // Activity をスイッチする  */
+             startActivity(intent);
+    }
+         });
+
         return v;
 
     }
@@ -108,8 +132,9 @@ public class BookListFragment extends Fragment  {
                     .setImageBitmap(user.getIcon());
             ((TextView) convertView.findViewById(R.id.title))
                     .setText(user.getTitle());
+
             ((TextView) convertView.findViewById(R.id.price))
-                    .setText(user.getPrice());
+                    .setText(user.getPrice()+ "円+税");
             ((TextView) convertView.findViewById(R.id.date))
                     .setText(user.getDate());
             return convertView;
@@ -153,6 +178,29 @@ public class BookListFragment extends Fragment  {
         private String price;
         private String date;
     }
+
+
+
+
+
+
+
+/*
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+        Intent intent = new Intent(this.getApplicationContext(), BookEditActivity.class);
+        // clickされたpositionのtextとphotoのID
+        String selectedTitle =title[position];
+        // インテントにセット
+        intent.putExtra("Text", selectedTitle);
+        intent.putExtra("Photo", selectedPhoto);       // Activity をスイッチする
+        startActivity(intent);
+    }
+
+
+*/
+    //編集画面への遷移と受け渡し
 
 
     /**
