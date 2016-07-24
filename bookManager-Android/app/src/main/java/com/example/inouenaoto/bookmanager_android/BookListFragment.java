@@ -1,5 +1,7 @@
 package com.example.inouenaoto.bookmanager_android;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +29,33 @@ public class BookListFragment extends Fragment  {
         // Required empty public constructor
     }
 
+    //セルの番号を送るためのもの
+    public final static String send_POSITION =
+            "com.example.inouenaoto.bookmanager_android.POSITION";
 
+    public static final int[] icons = {
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher
+    };
+
+    public static final String[] titles = {
+            "book1",
+            "book2",
+            "book3"
+    };
+
+    public static final String[] prices = {
+            "1200",
+            "1500",
+            "1600"
+    };
+
+    public static final String[] dates = {
+            "2014年 7月20日 ",
+            "2014年 8月20日 ",
+            "2014年 9月20日 "
+    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +68,7 @@ public class BookListFragment extends Fragment  {
 
         // データを準備
         ArrayList<User> users = new ArrayList<>();
-
+/*
         int[] icons = {
                 R.mipmap.ic_launcher,
                 R.mipmap.ic_launcher,
@@ -64,6 +92,7 @@ public class BookListFragment extends Fragment  {
                 "2014年 8月20日 ",
                 "2014年 9月20日 "
         };
+*/
         for (int i = 0; i < icons.length; i++) {
             User user = new User();
             user.setIcon(BitmapFactory.decodeResource(
@@ -82,19 +111,45 @@ public class BookListFragment extends Fragment  {
         // ListViewに表示
         myListView.setAdapter(adapter);
 
-        // Event
+        // セルのクリックで編集フラグメントへデータを送る
          myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+               FragmentManager fragmentManager = getFragmentManager();
+               FragmentTransaction transaction = fragmentManager.beginTransaction();
+               Fragment bookEditFragment = new BookEditFragment();
+
+               ListView listView = (ListView) parent;
+               User user = (User) listView.getItemAtPosition(position);
+
+               Bundle bundle = new Bundle();
+              // bundle.putString("titleText",titles[position]);
+               bundle.putString("titleText",user.getTitle());
+               bundle.putString("priceText",user.getPrice());
+
+               int selectedImage = icons[position];
+            //   bundle.putExtra("image",selectedImage);
+               //値を書き込む
+               bookEditFragment.setArguments(bundle);
+               transaction.replace(R.id.container, bookEditFragment).commit();
+               //transaction.commit();
+
+/*   フラグメントへはこのやり方じゃ渡せない（念のためまだ残している）
              Intent intent = new Intent(getActivity(), BookEditActivity.class);
-   /*       // clickされたpositionのtextとphotoのID
-              String selectedText = scenes[position];
-             int selectedPhoto = photos[position];
-            // インテントにセット
-              intent.putExtra("Text", selectedText);
-              intent.putExtra("Photo", selectedPhoto);
-              // Activity をスイッチする  */
+        // clickされたpositionのtextとphotoのID
+              String selectedTitle = titles[position];
+               String selectedPrice = prices[position];
+               String selectedDate = dates[position];
+               int selectedImage = icons[position];
+         // インテントにセット
+             intent.putExtra("titleText", selectedTitle);
+               intent.putExtra("priceText", selectedPrice);
+               intent.putExtra("dateText", selectedDate);
+               intent.putExtra("imageView", selectedImage);
+               intent.putExtra(send_POSITION, position);
              startActivity(intent);
+*/
+
     }
          });
 
@@ -217,4 +272,8 @@ public class BookListFragment extends Fragment  {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+
+
 }

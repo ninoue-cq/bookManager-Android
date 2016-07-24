@@ -23,7 +23,23 @@ public class BookEditFragment extends Fragment {
 
     public BookEditFragment() {}
 
-//タップされたセルのポジションを返す
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
+
+        String title = getArguments().getString("titleText");
+        String price = getArguments().getString("priceText");
+
+
+        EditText edittitle = (EditText) view.findViewById(R.id.editBookTitle);
+        EditText editprice = (EditText) view.findViewById(R.id.editBookPrice);
+
+        edittitle.setText(title);
+        editprice.setText(price);
+        return view;
+    }
+
+/*
     public static BookEditFragment newInstance(int position) {
         BookEditFragment editFragment = new BookEditFragment();
         Bundle args = new Bundle();
@@ -32,15 +48,25 @@ public class BookEditFragment extends Fragment {
         return editFragment;
     }
 
-
-    /*
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View editView = inflater.inflate(R.layout.fragment_book_edit, container, false);
-        ((EditText) editView.findViewById(R.id.editBookTitle))
+        View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
+        ((EditText) view.findViewById(R.id.editBookTitle))
                 .setText(BookListFragment.titles[getArguments().getInt("position")]);
-        return editView;
+        return view;
+    }
+*/
+
+
+/*    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_book_edit, container, false);
+        String title = getArguments().getString("titleText");
+        EditText titleText = (EditText) v.findViewById(R.id.editBookTitle);
+        return v;
+
     }
 */
 
