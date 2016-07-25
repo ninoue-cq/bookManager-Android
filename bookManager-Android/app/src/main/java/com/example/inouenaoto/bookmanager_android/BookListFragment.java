@@ -30,8 +30,8 @@ public class BookListFragment extends Fragment  {
     }
 
     //セルの番号を送るためのもの
-    public final static String send_POSITION =
-            "com.example.inouenaoto.bookmanager_android.POSITION";
+ //   public final static String send_POSITION =
+   //         "com.example.inouenaoto.bookmanager_android.POSITION";
 
     public static final int[] icons = {
             R.mipmap.ic_launcher,
