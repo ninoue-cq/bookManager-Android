@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 
 /**
@@ -30,15 +33,29 @@ public class BookEditFragment extends Fragment {
         String title = getArguments().getString("titleText");
         String price = getArguments().getString("priceText");
 
-
         EditText edittitle = (EditText) view.findViewById(R.id.editBookTitle);
         EditText editprice = (EditText) view.findViewById(R.id.editBookPrice);
 
         edittitle.setText(title);
         editprice.setText(price);
+
+/*キーボードを閉じる処理の途中
+        edittitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                // EditTextのフォーカスが外れた場合
+                if (hasFocus == false) {
+                    // ソフトキーボードを非表示にする
+                    InputMethodManager imm = (InputMethodManager)getActivity().
+                            getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }
+        });
+
+*/
         return view;
     }
-
 /*
     public static BookEditFragment newInstance(int position) {
         BookEditFragment editFragment = new BookEditFragment();
