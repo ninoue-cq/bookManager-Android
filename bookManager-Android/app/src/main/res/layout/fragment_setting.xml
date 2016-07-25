@@ -26,6 +26,7 @@
         android:layout_width="fill_parent"
         android:layout_height="60dp"
         android:text="アカウント設定"
+        android:id="@+id/settingButton"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

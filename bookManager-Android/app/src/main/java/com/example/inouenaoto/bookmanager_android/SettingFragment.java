@@ -1,12 +1,14 @@
 package com.example.inouenaoto.bookmanager_android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -32,8 +34,23 @@ public class SettingFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_setting, container, false);
 
+
+
+        Button btnDisp = (Button)v.findViewById(R.id.settingButton);
+        btnDisp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Sub 画面を起動
+                Intent intent = new Intent();
+                intent.setClassName("com.example.inouenaoto.bookmanager_android",
+                        "com.example.inouenaoto.bookmanager_android.AccountSettingActivity");
+              //  Intent intent = new Intent(getActivity(), AccountSettingActivity.class);
+                startActivity(intent);
+            }
+        });
         return v;
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
 
