@@ -28,7 +28,6 @@ import android.widget.Toast;
 
 import java.io.InputStream;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -77,7 +76,6 @@ public class BookEditFragment extends Fragment {
         return view;
     }
 
-
     //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
     public class SetDateTextAction implements View.OnClickListener {
         @Override
@@ -100,7 +98,6 @@ public class BookEditFragment extends Fragment {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
-
     }
 
     //アクションバーの設定
@@ -156,7 +153,6 @@ public class BookEditFragment extends Fragment {
             }
         }
     }
-
 
 /*
     public static BookEditFragment newInstance(int position) {

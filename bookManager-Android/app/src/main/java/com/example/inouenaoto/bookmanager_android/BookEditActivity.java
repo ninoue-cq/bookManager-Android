@@ -15,9 +15,6 @@ public class BookEditActivity extends Activity {
 
     }
 
-
-
-
 /*
         Intent intent = getIntent();
         String selectedTitle = intent.getStringExtra("titleText");

@@ -32,10 +32,6 @@ public class BookListFragment extends Fragment  {
         // Required empty public constructor
     }
 
-    //セルの番号を送るためのもの
- //   public final static String send_POSITION =
-   //         "com.example.inouenaoto.bookmanager_android.POSITION";
-
     public static final int[] icons = {
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
@@ -155,9 +151,7 @@ public class BookListFragment extends Fragment  {
 
     }
          });
-
         return v;
-
     }
     public class UserAdapter extends ArrayAdapter<User> {
 
@@ -179,9 +173,7 @@ public class BookListFragment extends Fragment  {
                         false
                 );
             }
-
             User user = (User) getItem(pos);
-
             ((ImageView) convertView.findViewById(R.id.icon))
                     .setImageBitmap(user.getIcon());
             ((TextView) convertView.findViewById(R.id.title))
@@ -233,7 +225,6 @@ public class BookListFragment extends Fragment  {
         private String date;
     }
 
-
     //アクションバーの設定
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -277,8 +268,6 @@ public class BookListFragment extends Fragment  {
 
 */
     //編集画面への遷移と受け渡し
-
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -293,8 +282,4 @@ public class BookListFragment extends Fragment  {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-
-
-
 }
