@@ -63,6 +63,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:hint="書籍名を入力してください"
             android:id="@+id/editBookTitle"
             android:layout_below="@+id/text_book"
             android:layout_marginTop="10dp" />
@@ -71,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="金額"
-            android:id="@+id/text_money"
+            android:id="@+id/text_price"
             android:textSize="12sp"
             android:layout_below="@+id/editBookTitle"
             android:layout_alignLeft="@+id/editBookTitle"
@@ -82,8 +83,9 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:hint="金額を入力してください"
             android:id="@+id/editBookPrice"
-            android:layout_below="@+id/text_money"
+            android:layout_below="@+id/text_price"
             android:layout_marginTop="10dp" />
 
         <TextView
@@ -97,15 +99,14 @@
             android:layout_alignStart="@+id/editBookPrice"
             android:layout_marginTop="10dp" />
 
-        <Button
+        <EditText
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_date"
+            android:gravity="center"
+            android:hint="日付を入力してください"
+            android:id="@+id/editBookDate"
             android:layout_below="@+id/text_date"
-            android:layout_alignLeft="@+id/text_date"
-            android:layout_alignStart="@+id/text_date"
             android:layout_marginTop="10dp" />
-
     </RelativeLayout>
 </RelativeLayout>
 </ScrollView>

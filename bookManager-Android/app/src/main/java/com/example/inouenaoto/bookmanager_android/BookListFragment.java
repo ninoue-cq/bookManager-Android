@@ -129,7 +129,7 @@ public class BookListFragment extends Fragment  {
               // bundle.putString("titleText",titles[position]);
                bundle.putString("titleText",user.getTitle());
                bundle.putString("priceText",user.getPrice());
-
+               bundle.putString("dateText",user.getDate());
                int selectedImage = icons[position];
             //   bundle.putExtra("image",selectedImage);
                //値を書き込む
