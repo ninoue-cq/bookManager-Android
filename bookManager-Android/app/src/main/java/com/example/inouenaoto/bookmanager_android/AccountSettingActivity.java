@@ -14,8 +14,7 @@ public class AccountSettingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setting);
-
-        final ActionBar actionBar = getActionBar();
+        setTitle("アカウント設定");
     }
 
     @Override

@@ -261,12 +261,6 @@ public class BookListFragment extends Fragment  {
         }
         return true;
     }
-
-
-
-
-
-
 /*
 
     @Override
