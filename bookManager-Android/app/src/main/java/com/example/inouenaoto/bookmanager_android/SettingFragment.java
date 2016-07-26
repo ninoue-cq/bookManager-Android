@@ -39,14 +39,20 @@ public class SettingFragment extends Fragment {
             public void onClick(View v) {
                 // Sub 画面を起動
                 Intent intent = new Intent();
-                intent.setClassName("com.example.inouenaoto.bookmanager_android",
+                   intent.setClassName("com.example.inouenaoto.bookmanager_android",
                         "com.example.inouenaoto.bookmanager_android.AccountSettingActivity");
-              //  Intent intent = new Intent(getActivity(), AccountSettingActivity.class);
+           //     Intent intent = new Intent(getActivity(), AccountSettingActivity.class);
                 startActivity(intent);
             }
         });
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+        getActivity().setTitle("設定");
+    }
+        // TODO: Rename method, update argument and hook method into UI event
 }

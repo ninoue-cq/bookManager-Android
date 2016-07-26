@@ -19,7 +19,6 @@ public class MainActivity extends Activity  {
        setContentView(R.layout.activity_main);
         //final ActionBar actionBar = getActionBar();
 
-
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         actionBar.addTab(actionBar.newTab()
@@ -31,8 +30,5 @@ public class MainActivity extends Activity  {
                 .setTabListener(new TabListener<SettingFragment>(
                         this, "tag2", SettingFragment.class)));
     }
-
-
-
 }
 
