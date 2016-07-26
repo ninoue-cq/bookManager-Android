@@ -1,7 +1,9 @@
 package com.example.inouenaoto.bookmanager_android;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -14,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -35,6 +38,10 @@ public class BookEditFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
 
+        EditText setDateText = (EditText) view.findViewById(R.id.editBookDate);
+        setDateText.setOnClickListener(new SetDateTextAction());
+
+        //一覧画面から受け取った値をそれぞれのエデットテキストに反映
         String title = getArguments().getString("titleText");
         String price = getArguments().getString("priceText");
         String date = getArguments().getString("dateText");
@@ -48,6 +55,31 @@ public class BookEditFragment extends Fragment {
         editdate.setText(date);
 
         return view;
+    }
+
+
+    //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
+    public class SetDateTextAction implements View.OnClickListener {
+        @Override
+        public void onClick(final View v) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            final DatePicker datePicker = new DatePicker(getActivity());
+            builder.setView(datePicker);
+            builder.setTitle("日付選択");
+            builder.setPositiveButton("決定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    EditText setDateText = (EditText) v.findViewById(R.id.editBookDate);
+                    int year = datePicker.getYear();
+                    int month = datePicker.getMonth();
+                    int day = datePicker.getDayOfMonth();
+                    setDateText.setText(year + "/" + month + "/" + day);
+                }
+            });
+            builder.setNegativeButton("キャンセル", null);
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
     }
 
     //アクションバーの設定
@@ -106,7 +138,6 @@ public class BookEditFragment extends Fragment {
     }
 */
 
-
 /*    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -117,10 +148,6 @@ public class BookEditFragment extends Fragment {
 
     }
 */
-
-
-
-
     /*
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_book_edit, container, false);
@@ -133,8 +160,6 @@ public class BookEditFragment extends Fragment {
     }
 
 */
-
-
     /*何番目のセルがタップされたかを返すメソッド
     public static BookEditFragment newInstance(int position) {
         BookEditFragment editFragment = new BookEditFragment();
