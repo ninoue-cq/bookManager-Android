@@ -16,38 +16,6 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         tools:context="BookEditFragment">
 
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/frameLayout"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="書籍編集"
-                android:id="@+id/textView"
-                android:layout_gravity="center"
-                android:textSize="20sp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="戻る"
-                android:id="@+id/btn_back"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="left" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="保存"
-                android:layout_marginTop="5dp"
-                android:id="@+id/btn_save"
-                android:layout_gravity="right" />
-        </FrameLayout>
-
 
         <ImageView
             android:layout_width="120dp"
@@ -96,6 +64,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:hint="書籍名を入力してください"
                 android:id="@+id/editBookTitle"
                 android:layout_below="@+id/text_book"
                 android:layout_marginTop="10dp" />
@@ -115,6 +84,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:hint="金額を入力してください"
                 android:id="@+id/editBookPrice"
                 android:layout_below="@+id/text_money"
                 android:layout_marginTop="10dp" />

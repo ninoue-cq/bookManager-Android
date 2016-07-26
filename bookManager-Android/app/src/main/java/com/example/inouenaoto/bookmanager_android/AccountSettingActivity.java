@@ -20,7 +20,7 @@ public class AccountSettingActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add, menu);
+        getMenuInflater().inflate(R.menu.account_setting_menu, menu);
         return true;
     }
 

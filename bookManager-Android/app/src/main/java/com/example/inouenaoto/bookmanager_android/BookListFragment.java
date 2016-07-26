@@ -11,6 +11,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -156,9 +159,6 @@ public class BookListFragment extends Fragment  {
         return v;
 
     }
-
-
-
     public class UserAdapter extends ArrayAdapter<User> {
 
         private LayoutInflater layoutInflater;
@@ -169,7 +169,6 @@ public class BookListFragment extends Fragment  {
                     Context.LAYOUT_INFLATER_SERVICE
             );
         }
-
 
         @Override
         public View getView(int pos, View convertView, ViewGroup parent) {
@@ -234,6 +233,34 @@ public class BookListFragment extends Fragment  {
         private String date;
     }
 
+
+    //アクションバーの設定
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+
+        getActivity().setTitle("書籍一覧");
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.list_menu, menu);
+    }
+    //アクションバーのボタンイベントのハンドリング
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.toAddButton:
+                Intent intent = new Intent();
+                intent.setClassName("com.example.inouenaoto.bookmanager_android",
+                        "com.example.inouenaoto.bookmanager_android.BookAddActivity");
+                startActivity(intent);
+                break;
+        }
+        return true;
+    }
 
 
 
