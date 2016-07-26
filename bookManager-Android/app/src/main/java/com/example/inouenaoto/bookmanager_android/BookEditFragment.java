@@ -1,9 +1,13 @@
 package com.example.inouenaoto.bookmanager_android;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -18,8 +22,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Toast;
+
+import java.io.InputStream;
 
 
 /**
@@ -33,11 +40,12 @@ import android.widget.Toast;
 public class BookEditFragment extends Fragment {
 
     public BookEditFragment() {}
-    private static final int sentImage =0;
+    private static final int REQUEST_GALLERY =0;
+    private ImageView imgView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
+        final View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
 
         EditText setDateText = (EditText) view.findViewById(R.id.editBookDate);
         setDateText.setOnClickListener(new SetDateTextAction());
@@ -55,6 +63,17 @@ public class BookEditFragment extends Fragment {
         editprice.setText(price);
         editdate.setText(date);
 
+        //画像添付ボタンの処理
+        view.findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgView=(ImageView) view.findViewById(R.id.bookImage);
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, REQUEST_GALLERY);
+            }
+        });
         return view;
     }
 
@@ -81,6 +100,7 @@ public class BookEditFragment extends Fragment {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
+
     }
 
     //アクションバーの設定
@@ -117,6 +137,24 @@ public class BookEditFragment extends Fragment {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //  super.onActivityResult(requestCode, resultCode, data);
+        // TODO Auto-generated method stub
+       // ImageView imgView=(ImageView) findViewById(R.id.bookImage);
+        if(requestCode == REQUEST_GALLERY && resultCode == Activity.RESULT_OK) {
+            try {
+                InputStream in = getActivity().getContentResolver().openInputStream(data.getData());
+                Bitmap img = BitmapFactory.decodeStream(in);
+                in.close();
+                // 選択した画像を表示
+                imgView.setImageBitmap(img);
+            } catch (Exception e) {
+
+            }
+        }
     }
 
 

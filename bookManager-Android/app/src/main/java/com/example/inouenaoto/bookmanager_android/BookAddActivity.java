@@ -42,6 +42,7 @@ public class BookAddActivity extends Activity  {
         EditText setDateText = (EditText) findViewById(R.id.addBookDate);
         setDateText.setOnClickListener(new SetDateTextAction());
 
+        //画像添付ボタンの処理
         findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
