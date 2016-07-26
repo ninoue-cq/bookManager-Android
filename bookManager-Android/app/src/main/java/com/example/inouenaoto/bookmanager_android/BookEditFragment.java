@@ -1,17 +1,22 @@
 package com.example.inouenaoto.bookmanager_android;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 
 /**
@@ -56,6 +61,44 @@ public class BookEditFragment extends Fragment {
 */
         return view;
     }
+
+    //アクションバーの設定
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+
+        getActivity().setTitle("書籍編集");
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.edie_menu, menu);
+    }
+    //アクションバーのボタンイベントのハンドリング
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+
+            case R.id.closeButton:
+               // Toast.makeText(getActivity(), R.string.add, Toast.LENGTH_SHORT).show();
+                BookListFragment bookListfragment = new BookListFragment();
+                FragmentManager manager = this.getFragmentManager();
+                manager.beginTransaction()
+                        .replace(R.id.container, bookListfragment)
+                        .addToBackStack("transaction")
+                        .commit();
+                break;
+            case R.id.saveButton:
+                //編集データをサーバーに送る処理を書く
+                break;
+        }
+        return true;
+    }
+
+
 /*
     public static BookEditFragment newInstance(int position) {
         BookEditFragment editFragment = new BookEditFragment();
