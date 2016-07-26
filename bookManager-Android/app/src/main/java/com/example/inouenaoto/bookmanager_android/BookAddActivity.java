@@ -6,6 +6,9 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.icu.util.Calendar;
 import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,14 +19,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.io.InputStream;
 
 public class BookAddActivity extends Activity  {
 
     // 日付設定ダイアログのインスタンスを格納する変数
     private DatePickerDialog.OnDateSetListener varDateSetListener;
     private BookAddActivity bookAddActivity;
+    private static final int REQUEST_GALLERY =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,25 @@ public class BookAddActivity extends Activity  {
         EditText setDateText = (EditText) findViewById(R.id.addBookDate);
         setDateText.setOnClickListener(new SetDateTextAction());
 
+        findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView imgView=(ImageView) findViewById(R.id.bookImage);
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, REQUEST_GALLERY);
+            }
+        });
+
+
+/*
+        ImageView imgView=(ImageView) findViewById(R.id.bookImage);
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, REQUEST_GALLERY);
+*/
     }
 
     //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
@@ -81,7 +107,26 @@ public class BookAddActivity extends Activity  {
         return true;
     }
 
-/*ピッカーの処理
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+      //  super.onActivityResult(requestCode, resultCode, data);
+        // TODO Auto-generated method stub
+        ImageView imgView=(ImageView) findViewById(R.id.bookImage);
+        if(requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
+            try {
+                InputStream in = getContentResolver().openInputStream(data.getData());
+                Bitmap img = BitmapFactory.decodeStream(in);
+                in.close();
+                // 選択した画像を表示
+                imgView.setImageBitmap(img);
+                } catch (Exception e) {
+
+                }
+            }
+        }
+
+
+    /*ピッカーの処理
     private class DatePick extends DialogFragment implements
             DatePickerDialog.OnDateSetListener{
 

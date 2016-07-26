@@ -33,6 +33,7 @@ import android.widget.Toast;
 public class BookEditFragment extends Fragment {
 
     public BookEditFragment() {}
+    private static final int sentImage =0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
