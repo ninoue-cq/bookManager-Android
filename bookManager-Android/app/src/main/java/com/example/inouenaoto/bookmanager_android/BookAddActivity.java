@@ -54,7 +54,6 @@ public class BookAddActivity extends Activity  {
             }
         });
 
-
 /*
         ImageView imgView=(ImageView) findViewById(R.id.bookImage);
         Intent intent = new Intent();
