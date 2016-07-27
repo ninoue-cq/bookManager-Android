@@ -28,8 +28,8 @@ import java.io.InputStream;
 public class BookAddActivity extends Activity  {
 
     // 日付設定ダイアログのインスタンスを格納する変数
-    private DatePickerDialog.OnDateSetListener varDateSetListener;
-    private static final int REQUEST_GALLERY =0;
+    private DatePickerDialog.OnDateSetListener DateSetListener;
+    private static final int mREQUEST_GALLERY = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class BookAddActivity extends Activity  {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, REQUEST_GALLERY);
+                startActivityForResult(intent, mREQUEST_GALLERY);
             }
         });
     }
@@ -102,7 +102,7 @@ public class BookAddActivity extends Activity  {
       //  super.onActivityResult(requestCode, resultCode, data);
         // TODO Auto-generated method stub
         ImageView imgView=(ImageView) findViewById(R.id.bookImage);
-        if(requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
+        if(requestCode == mREQUEST_GALLERY && resultCode == RESULT_OK) {
             try {
                 InputStream in = getContentResolver().openInputStream(data.getData());
                 Bitmap img = BitmapFactory.decodeStream(in);
@@ -114,29 +114,6 @@ public class BookAddActivity extends Activity  {
                 }
             }
         }
-
-
-    /*ピッカーの処理
-    private class DatePick extends DialogFragment implements
-            DatePickerDialog.OnDateSetListener{
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-
-            return new DatePickerDialog(getActivity(), (BookAddActivity)getActivity(),  year, month, day);
-        }
-
-        @Override
-        public void onDateSet(android.widget.DatePicker view, int year,
-                              int monthOfYear, int dayOfMonth) {
-        }
-
-    }
-    */
 }
 
 

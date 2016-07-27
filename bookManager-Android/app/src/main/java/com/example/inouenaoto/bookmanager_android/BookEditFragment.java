@@ -28,25 +28,19 @@ import android.widget.Toast;
 
 import java.io.InputStream;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BookEditFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BookEditFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class BookEditFragment extends Fragment {
 
     public BookEditFragment() {}
-    private static final int REQUEST_GALLERY =0;
-    private ImageView imgView;
+
+    private static final int mREQUEST_GALLERY = 0;
+    private ImageView mImgView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
+        final View v = inflater.inflate(R.layout.fragment_book_edit, container, false);
 
-        EditText setDateText = (EditText) view.findViewById(R.id.editBookDate);
+        EditText setDateText = (EditText) v.findViewById(R.id.editBookDate);
         setDateText.setOnClickListener(new SetDateTextAction());
 
         //一覧画面から受け取った値をそれぞれのエデットテキストに反映
@@ -54,26 +48,26 @@ public class BookEditFragment extends Fragment {
         String price = getArguments().getString("priceText");
         String date = getArguments().getString("dateText");
 
-        EditText edittitle = (EditText) view.findViewById(R.id.editBookTitle);
-        EditText editprice = (EditText) view.findViewById(R.id.editBookPrice);
-        EditText editdate = (EditText) view.findViewById(R.id.editBookDate);
+        EditText editTitle = (EditText) v.findViewById(R.id.editBookTitle);
+        EditText editPrice = (EditText) v.findViewById(R.id.editBookPrice);
+        EditText editDate = (EditText) v.findViewById(R.id.editBookDate);
 
-        edittitle.setText(title);
-        editprice.setText(price);
-        editdate.setText(date);
+        editTitle.setText(title);
+        editPrice.setText(price);
+        editDate.setText(date);
 
         //画像添付ボタンの処理
-        view.findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
+        v.findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imgView=(ImageView) view.findViewById(R.id.bookImage);
+                mImgView=(ImageView) v.findViewById(R.id.bookImage);
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, REQUEST_GALLERY);
+                startActivityForResult(intent, mREQUEST_GALLERY);
             }
         });
-        return view;
+        return v;
     }
 
     //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
@@ -122,10 +116,10 @@ public class BookEditFragment extends Fragment {
 
             case R.id.closeButton:
                // Toast.makeText(getActivity(), R.string.add, Toast.LENGTH_SHORT).show();
-                BookListFragment bookListfragment = new BookListFragment();
+                BookListFragment bookListFragment = new BookListFragment();
                 FragmentManager manager = this.getFragmentManager();
                 manager.beginTransaction()
-                        .replace(R.id.container, bookListfragment)
+                        .replace(R.id.container, bookListFragment)
                         .addToBackStack("transaction")
                         .commit();
                 break;
@@ -141,78 +135,16 @@ public class BookEditFragment extends Fragment {
         //  super.onActivityResult(requestCode, resultCode, data);
         // TODO Auto-generated method stub
        // ImageView imgView=(ImageView) findViewById(R.id.bookImage);
-        if(requestCode == REQUEST_GALLERY && resultCode == Activity.RESULT_OK) {
+        if(requestCode == mREQUEST_GALLERY && resultCode == Activity.RESULT_OK) {
             try {
                 InputStream in = getActivity().getContentResolver().openInputStream(data.getData());
                 Bitmap img = BitmapFactory.decodeStream(in);
                 in.close();
                 // 選択した画像を表示
-                imgView.setImageBitmap(img);
+                mImgView.setImageBitmap(img);
             } catch (Exception e) {
 
             }
         }
     }
-
-/*
-    public static BookEditFragment newInstance(int position) {
-        BookEditFragment editFragment = new BookEditFragment();
-        Bundle args = new Bundle();
-        args.putInt("position", position);
-        editFragment.setArguments(args);
-        return editFragment;
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
-        ((EditText) view.findViewById(R.id.editBookTitle))
-                .setText(BookListFragment.titles[getArguments().getInt("position")]);
-        return view;
-    }
-*/
-
-/*    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_book_edit, container, false);
-        String title = getArguments().getString("titleText");
-        EditText titleText = (EditText) v.findViewById(R.id.editBookTitle);
-        return v;
-
-    }
-*/
-    /*
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_book_edit, container, false);
-
-        String title = getArguments().getString("title");
-        EditText editText = (EditText) v.findViewById(R.id.editBookTitle);
-        editText.setText(title);
-
-        return v;
-    }
-
-*/
-    /*何番目のセルがタップされたかを返すメソッド
-    public static BookEditFragment newInstance(int position) {
-        BookEditFragment editFragment = new BookEditFragment();
-        Bundle args = new Bundle();
-        args.putInt("position", position);
-        BookEditFragment.setArguments(args);
-        return editFragment;
-    }
-    */
-
-    /*
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View editView = inflater.inflate(R.layout.fragment_book_edit, container, false);
-        ((EditText) editView.findViewById(R.id.editBookTitle))
-                .setText(News.Details[getArguments().getInt("position")]);
-        return editView;
-    }
-    */
 }
