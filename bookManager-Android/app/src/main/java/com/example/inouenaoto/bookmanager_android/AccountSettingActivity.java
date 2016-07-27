@@ -27,10 +27,10 @@ public class AccountSettingActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
 
-            case R.id.closeButton:
+            case R.id.close_button:
                 finish();
                 break;
-            case R.id.saveButton:
+            case R.id.save_button:
                 //アカウントの登録処理を書く
                 break;
         }

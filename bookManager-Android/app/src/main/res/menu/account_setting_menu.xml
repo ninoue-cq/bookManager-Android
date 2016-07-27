@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".BookEditFragment">
     <item
-        android:id="@+id/closeButton"
+        android:id="@+id/close_button"
         android:showAsAction="always"
         android:title="閉じる"
         tools:ignore="AppCompatResource" />
 
     <item
-        android:id="@+id/saveButton"
+        android:id="@+id/save_button"
         android:showAsAction="always"
         android:title="保存"
         tools:ignore="AppCompatResource" />

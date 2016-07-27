@@ -78,7 +78,7 @@ public class BookAddActivity extends Activity  {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.account_setting_menu, menu);
+        getMenuInflater().inflate(R.menu.add_menu, menu);
         return true;
     }
 
@@ -86,10 +86,10 @@ public class BookAddActivity extends Activity  {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
-            case R.id.closeButton:
+            case R.id.close_button:
                 finish();
                 break;
-            case R.id.saveButton:
+            case R.id.save_button:
                 //書籍追加の処理をここに書く
                 break;
         }

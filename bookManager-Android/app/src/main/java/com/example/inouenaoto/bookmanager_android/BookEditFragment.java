@@ -114,7 +114,7 @@ public class BookEditFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
 
-            case R.id.closeButton:
+            case R.id.close_button:
                // Toast.makeText(getActivity(), R.string.add, Toast.LENGTH_SHORT).show();
                 BookListFragment bookListFragment = new BookListFragment();
                 FragmentManager manager = this.getFragmentManager();
@@ -123,7 +123,7 @@ public class BookEditFragment extends Fragment {
                         .addToBackStack("transaction")
                         .commit();
                 break;
-            case R.id.saveButton:
+            case R.id.save_button:
                 //編集データをサーバーに送る処理を書く
                 break;
         }
