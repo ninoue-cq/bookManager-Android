@@ -107,7 +107,7 @@ public class BookEditFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-        inflater.inflate(R.menu.edie_menu, menu);
+        inflater.inflate(R.menu.edit_menu, menu);
     }
     //アクションバーのボタンイベントのハンドリング
     @Override

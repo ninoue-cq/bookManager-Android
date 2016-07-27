@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".BookEditFragment">
     <item
-        android:id="@+id/toAddButton"
+        android:id="@+id/to_add_button"
         android:showAsAction="always"
         android:title="書籍追加"
         tools:ignore="AppCompatResource" />

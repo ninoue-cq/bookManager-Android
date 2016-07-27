@@ -55,6 +55,7 @@ public class BookListFragment extends Fragment  {
             "2014年 8月20日 ",
             "2014年 9月20日 "
     };
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,50 +63,23 @@ public class BookListFragment extends Fragment  {
         View listFragment= inflater.inflate(R.layout.fragment_book_list, container, false);
         ListView listView = (ListView) listFragment.findViewById(R.id.my_book_listView);
 
-      //  myListView.setOnItemClickListener(this);
-
-
         // データを準備
-        ArrayList<User> users = new ArrayList<>();
-/*
-        int[] icons = {
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher
-        };
+        ArrayList<CustomData> users = new ArrayList<>();
 
-        String[] titles = {
-                "book1",
-                "book2",
-                "book3"
-        };
-
-        String[] prices = {
-                "1200",
-                "1500",
-                "1600"
-        };
-
-        String[] dates = {
-                "2014年 7月20日 ",
-                "2014年 8月20日 ",
-                "2014年 9月20日 "
-        };
-*/
         for (int i = 0; i < icons.length; i++) {
-            User user = new User();
-            user.setIcon(BitmapFactory.decodeResource(
+            CustomData customData = new CustomData();
+            customData.setIcon(BitmapFactory.decodeResource(
                     getResources(),
                     icons[i]
             ));
-            user.setTitle(titles[i]);
-            user.setPrice(prices[i]);
-            user.setDate(dates[i]);
-            users.add(user);
+            customData.setTitle(titles[i]);
+            customData.setPrice(prices[i]);
+            customData.setDate(dates[i]);
+            users.add(customData);
         }
 
         // Adapter - ArrayAdapter - UserAdapter
-        UserAdapter adapter = new UserAdapter(getActivity(), 0, users);
+        ListAdapter adapter = new ListAdapter(getActivity(), 0, users);
 
         // ListViewに表示
         listView.setAdapter(adapter);
@@ -119,13 +93,13 @@ public class BookListFragment extends Fragment  {
                Fragment bookEditFragment = new BookEditFragment();
 
                ListView listView = (ListView) parent;
-               User user = (User) listView.getItemAtPosition(position);
+               CustomData customData = (CustomData) listView.getItemAtPosition(position);
 
                Bundle bundle = new Bundle();
               // bundle.putString("titleText",titles[position]);
-               bundle.putString("titleText",user.getTitle());
-               bundle.putString("priceText",user.getPrice());
-               bundle.putString("dateText",user.getDate());
+               bundle.putString("titleText",customData.getTitle());
+               bundle.putString("priceText",customData.getPrice());
+               bundle.putString("dateText",customData.getDate());
                int selectedImage = icons[position];
             //   bundle.putExtra("image",selectedImage);
                //値を書き込む
@@ -135,77 +109,6 @@ public class BookListFragment extends Fragment  {
     }
          });
         return listFragment;
-    }
-    public class UserAdapter extends ArrayAdapter<User> {
-
-        private LayoutInflater layoutInflater;
-
-        public UserAdapter(Context c, int id, ArrayList<User> users) {
-            super(c, id, users);
-            this.layoutInflater = (LayoutInflater) c.getSystemService(
-                    Context.LAYOUT_INFLATER_SERVICE
-            );
-        }
-
-        @Override
-        public View getView(int pos, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = layoutInflater.inflate(
-                        R.layout.listitem,
-                        parent,
-                        false
-                );
-            }
-            User user = (User) getItem(pos);
-            ((ImageView) convertView.findViewById(R.id.icon))
-                    .setImageBitmap(user.getIcon());
-            ((TextView) convertView.findViewById(R.id.title))
-                    .setText(user.getTitle());
-
-            ((TextView) convertView.findViewById(R.id.price))
-                    .setText(user.getPrice()+ "円+税");
-            ((TextView) convertView.findViewById(R.id.date))
-                    .setText(user.getDate());
-            return convertView;
-        }
-    }
-
-    public class User {
-        private Bitmap icon;
-        private String title;
-
-        public String getPrice() {
-            return price;
-        }
-
-        public void setPrice(String price) {
-            this.price = price;
-        }
-
-        public String getDate() {
-            return date;
-        }
-
-        public void setDate(String date) {
-            this.date = date;
-        }
-        public Bitmap getIcon() {
-            return icon;
-        }
-
-        public void setIcon(Bitmap icon) {
-            this.icon = icon;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        private String price;
-        private String date;
     }
 
     //アクションバーの設定
@@ -226,7 +129,7 @@ public class BookListFragment extends Fragment  {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
-            case R.id.toAddButton:
+            case R.id.to_add_button:
                 Intent intent = new Intent();
                 intent.setClassName("com.example.inouenaoto.bookmanager_android",
                         "com.example.inouenaoto.bookmanager_android.BookAddActivity");
@@ -235,32 +138,7 @@ public class BookListFragment extends Fragment  {
         }
         return true;
     }
-/*
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-        Intent intent = new Intent(this.getApplicationContext(), BookEditActivity.class);
-        // clickされたpositionのtextとphotoのID
-        String selectedTitle =title[position];
-        // インテントにセット
-        intent.putExtra("Text", selectedTitle);
-        intent.putExtra("Photo", selectedPhoto);       // Activity をスイッチする
-        startActivity(intent);
-    }
-
-
-*/
-    //編集画面への遷移と受け渡し
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
