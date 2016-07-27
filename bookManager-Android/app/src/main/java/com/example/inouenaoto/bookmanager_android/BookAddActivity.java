@@ -29,7 +29,6 @@ public class BookAddActivity extends Activity  {
 
     // 日付設定ダイアログのインスタンスを格納する変数
     private DatePickerDialog.OnDateSetListener varDateSetListener;
-    private BookAddActivity bookAddActivity;
     private static final int REQUEST_GALLERY =0;
 
     @Override
@@ -38,7 +37,6 @@ public class BookAddActivity extends Activity  {
         setContentView(R.layout.activity_book_add);
         setTitle("書籍追加");
 
-        bookAddActivity = this;
         EditText setDateText = (EditText) findViewById(R.id.addBookDate);
         setDateText.setOnClickListener(new SetDateTextAction());
 
@@ -53,22 +51,14 @@ public class BookAddActivity extends Activity  {
                 startActivityForResult(intent, REQUEST_GALLERY);
             }
         });
-
-/*
-        ImageView imgView=(ImageView) findViewById(R.id.bookImage);
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, REQUEST_GALLERY);
-*/
     }
 
     //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
     public class SetDateTextAction implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(bookAddActivity);
-            final DatePicker datePicker = new DatePicker(bookAddActivity);
+            AlertDialog.Builder builder = new AlertDialog.Builder(BookAddActivity.this);
+            final DatePicker datePicker = new DatePicker(BookAddActivity.this);
             builder.setView(datePicker);
             builder.setTitle("日付選択");
             builder.setPositiveButton("決定", new DialogInterface.OnClickListener() {
