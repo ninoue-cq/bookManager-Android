@@ -37,11 +37,11 @@ public class BookAddActivity extends Activity  {
         setContentView(R.layout.activity_book_add);
         setTitle("書籍追加");
 
-        EditText setDateText = (EditText) findViewById(R.id.addBookDate);
+        EditText setDateText = (EditText) findViewById(R.id.add_book_date);
         setDateText.setOnClickListener(new SetDateTextAction());
 
         //画像添付ボタンの処理
-        findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -63,7 +63,7 @@ public class BookAddActivity extends Activity  {
             builder.setPositiveButton("決定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    EditText setDateText = (EditText) v.findViewById(R.id.addBookDate);
+                    EditText setDateText = (EditText) v.findViewById(R.id.add_book_date);
                     int year = datePicker.getYear();
                     int month = datePicker.getMonth();
                     int day = datePicker.getDayOfMonth();
@@ -100,7 +100,7 @@ public class BookAddActivity extends Activity  {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
       //  super.onActivityResult(requestCode, resultCode, data);
         // TODO Auto-generated method stub
-        ImageView bookImageView = (ImageView) findViewById(R.id.bookImage);
+        ImageView bookImageView = (ImageView) findViewById(R.id.book_image);
         if(requestCode == mREQUEST_GALLERY && resultCode == RESULT_OK) {
             try {
                 InputStream inputStream = getContentResolver().openInputStream(data.getData());

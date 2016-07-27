@@ -60,7 +60,7 @@ public class BookListFragment extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View listFragment= inflater.inflate(R.layout.fragment_book_list, container, false);
-        ListView listView = (ListView) listFragment.findViewById(R.id.myBookListView);
+        ListView listView = (ListView) listFragment.findViewById(R.id.my_book_listView);
 
       //  myListView.setOnItemClickListener(this);
 

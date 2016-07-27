@@ -4,109 +4,112 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:layout_weight="1"
-    android:id="@+id/mainLayout"
-    android:windowSoftInputMode="adjustResize">
+    android:id="@+id/mainLayout">
 
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="BookEditFragment">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="BookEditFragment">
 
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="150dp"
-        android:id="@+id/bookImage"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="54dp"
-        android:layout_below="@+id/frameLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="画像添付"
-        android:id="@+id/sendButton"
-        android:layout_marginTop="48dp"
-        android:layout_alignTop="@+id/bookImage"
-        android:layout_alignRight="@+id/relativeLayout"
-        android:layout_alignEnd="@+id/relativeLayout"
-        android:layout_marginRight="40dp"
-        android:layout_marginEnd="40dp" />
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:id="@+id/book_image"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="54dp"
+            android:layout_below="@+id/frameLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:gravity="center"
-        android:id="@+id/relativeLayout"
-        android:layout_below="@+id/sendButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp">
-
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="書籍名"
-            android:id="@+id/text_book"
-            android:textSize="12sp"
-            android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/editBookTitle"
-            android:layout_alignStart="@+id/editBookTitle" />
+            android:text="画像添付"
+            android:id="@+id/send_button"
+            android:layout_marginTop="48dp"
+            android:layout_alignTop="@+id/book_image"
+            android:layout_alignRight="@+id/relativeLayout"
+            android:layout_alignEnd="@+id/relativeLayout"
+            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp" />
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:gravity="center"
-            android:hint="書籍名を入力してください"
-            android:id="@+id/editBookTitle"
-            android:layout_below="@+id/text_book"
-            android:layout_marginTop="10dp" />
+            android:id="@+id/relativeLayout"
+            android:layout_below="@+id/send_button"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="40dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="金額"
-            android:id="@+id/text_price"
-            android:textSize="12sp"
-            android:layout_below="@+id/editBookTitle"
-            android:layout_alignLeft="@+id/editBookTitle"
-            android:layout_alignStart="@+id/editBookTitle"
-            android:layout_marginTop="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="書籍名"
+                android:id="@+id/text_book"
+                android:textSize="12sp"
+                android:layout_alignParentTop="true"
+                android:windowSoftInputMode="adjustResize"
+                android:layout_alignLeft="@+id/edit_book_title"
+                android:layout_alignStart="@+id/edit_book_title" />
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="金額を入力してください"
-            android:id="@+id/editBookPrice"
-            android:layout_below="@+id/text_price"
-            android:layout_marginTop="10dp" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="書籍名を入力してください"
+                android:id="@+id/edit_book_title"
+                android:layout_below="@+id/text_book"
+                android:layout_marginTop="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="購入日"
-            android:id="@+id/text_date"
-            android:textSize="12sp"
-            android:layout_below="@+id/editBookPrice"
-            android:layout_alignLeft="@+id/editBookPrice"
-            android:layout_alignStart="@+id/editBookPrice"
-            android:layout_marginTop="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="金額"
+                android:id="@+id/text_price"
+                android:textSize="12sp"
+                android:layout_below="@+id/edit_book_title"
+                android:layout_alignLeft="@+id/edit_book_title"
+                android:layout_alignStart="@+id/edit_book_title"
+                android:layout_marginTop="10dp" />
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="日付を入力してください"
-            android:id="@+id/editBookDate"
-            android:layout_below="@+id/text_date"
-            android:layout_marginTop="10dp" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="金額を入力してください"
+                android:id="@+id/edit_book_price"
+                android:layout_below="@+id/text_price"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="購入日"
+                android:id="@+id/text_date"
+                android:textSize="12sp"
+                android:layout_below="@+id/edit_book_price"
+                android:layout_alignLeft="@+id/edit_book_price"
+                android:layout_alignStart="@+id/edit_book_price"
+                android:layout_marginTop="10dp" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="日付を入力してください"
+                android:id="@+id/edit_book_date"
+                android:layout_below="@+id/text_date"
+                android:layout_marginTop="10dp" />
+
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
 </ScrollView>

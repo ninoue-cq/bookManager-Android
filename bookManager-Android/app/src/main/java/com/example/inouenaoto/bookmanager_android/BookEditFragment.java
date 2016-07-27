@@ -40,7 +40,7 @@ public class BookEditFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_book_edit, container, false);
 
-        EditText setDateText = (EditText) v.findViewById(R.id.editBookDate);
+        EditText setDateText = (EditText) v.findViewById(R.id.edit_book_date);
         setDateText.setOnClickListener(new SetDateTextAction());
 
         //一覧画面から受け取った値をそれぞれのエデットテキストに反映
@@ -48,19 +48,19 @@ public class BookEditFragment extends Fragment {
         String price = getArguments().getString("priceText");
         String date = getArguments().getString("dateText");
 
-        EditText editTitle = (EditText) v.findViewById(R.id.editBookTitle);
-        EditText editPrice = (EditText) v.findViewById(R.id.editBookPrice);
-        EditText editDate = (EditText) v.findViewById(R.id.editBookDate);
+        EditText editTitle = (EditText) v.findViewById(R.id.edit_book_title);
+        EditText editPrice = (EditText) v.findViewById(R.id.edit_book_price);
+        EditText editDate = (EditText) v.findViewById(R.id.edit_book_date);
 
         editTitle.setText(title);
         editPrice.setText(price);
         editDate.setText(date);
 
         //画像添付ボタンの処理
-        v.findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
+        v.findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBookImageView=(ImageView) v.findViewById(R.id.bookImage);
+                mBookImageView=(ImageView) v.findViewById(R.id.book_image);
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -81,7 +81,7 @@ public class BookEditFragment extends Fragment {
             builder.setPositiveButton("決定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    EditText setDateText = (EditText) v.findViewById(R.id.editBookDate);
+                    EditText setDateText = (EditText) v.findViewById(R.id.edit_book_date);
                     int year = datePicker.getYear();
                     int month = datePicker.getMonth();
                     int day = datePicker.getDayOfMonth();

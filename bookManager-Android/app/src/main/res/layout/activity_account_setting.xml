@@ -35,15 +35,15 @@
                 android:focusableInTouchMode="true"
                 android:textSize="12sp"
                 android:layout_alignParentTop="true"
-                android:layout_alignLeft="@+id/mailAdress"
-                android:layout_alignStart="@+id/mailAdress" />
+                android:layout_alignLeft="@+id/mail_adress"
+                android:layout_alignStart="@+id/mail_adress" />
 
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="書籍名を入力してください"
-                android:id="@+id/mailAdress"
+                android:id="@+id/mail_adress"
                 android:layout_below="@+id/text_adress"
                 android:layout_marginTop="10dp" />
 
@@ -53,9 +53,9 @@
                 android:text="パスワード"
                 android:id="@+id/text_pass"
                 android:textSize="12sp"
-                android:layout_below="@+id/mailAdress"
-                android:layout_alignLeft="@+id/mailAdress"
-                android:layout_alignStart="@+id/mailAdress"
+                android:layout_below="@+id/mail_adress"
+                android:layout_alignLeft="@+id/mail_adress"
+                android:layout_alignStart="@+id/mail_adress"
                 android:layout_marginTop="10dp" />
 
             <EditText
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="パスワードを入力してください"
-                android:id="@+id/passWord"
+                android:id="@+id/pass_word"
                 android:layout_below="@+id/text_pass"
                 android:layout_marginTop="10dp" />
 
@@ -73,9 +73,9 @@
                 android:text="パスワード確認"
                 android:id="@+id/text_pass_conf"
                 android:textSize="12sp"
-                android:layout_below="@+id/passWord"
-                android:layout_alignLeft="@+id/passWord"
-                android:layout_alignStart="@+id/passWord"
+                android:layout_below="@+id/pass_word"
+                android:layout_alignLeft="@+id/pass_word"
+                android:layout_alignStart="@+id/pass_word"
                 android:layout_marginTop="10dp" />
 
             <EditText

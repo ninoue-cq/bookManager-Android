@@ -34,7 +34,7 @@ public class SettingFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_setting, container, false);
 
-        Button btnDisp = (Button)v.findViewById(R.id.settingButton);
+        Button btnDisp = (Button)v.findViewById(R.id.setting_button);
         btnDisp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AccountSettingActivity.class);
