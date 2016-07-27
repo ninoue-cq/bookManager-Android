@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,17 +22,28 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-public class BookListFragment extends Fragment  {
 
+public class BookListFragment extends Fragment implements APIListener {
+
+    private ListView mListView;
+    private BookListFragment mThisFragment;
     public BookListFragment() {
         // Required empty public constructor
     }
 
+/*
     public static final int[] icons = {
             R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,
@@ -56,17 +68,34 @@ public class BookListFragment extends Fragment  {
             "2014年 9月20日 "
     };
 
+*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View listFragment= inflater.inflate(R.layout.fragment_book_list, container, false);
-        ListView listView = (ListView) listFragment.findViewById(R.id.my_book_listView);
+
+
+    //    ListView mlistView = (ListView) listFragment.findViewById(R.id.my_book_listView);
+
+        mThisFragment = this;
+
+        (new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //ここで一覧の取得をしたい
+                BookListGet getBookData = new BookListGet();
+                getBookData.setAPIListener(mThisFragment);
+                getBookData.execute();
+            }
+        })).start();
+
+        View v= inflater.inflate(R.layout.fragment_book_list, container, false);
+        mListView = (ListView) v.findViewById(R.id.my_book_listView);
 
         // データを準備
-        ArrayList<CustomData> users = new ArrayList<>();
+//        ArrayList<CustomData> users = new ArrayList<>();
 
-        for (int i = 0; i < icons.length; i++) {
+/*        for (int i = 0; i < icons.length; i++) {
             CustomData customData = new CustomData();
             customData.setIcon(BitmapFactory.decodeResource(
                     getResources(),
@@ -75,17 +104,17 @@ public class BookListFragment extends Fragment  {
             customData.setTitle(titles[i]);
             customData.setPrice(prices[i]);
             customData.setDate(dates[i]);
-            users.add(customData);
+            users.add(custoomData);
         }
-
+*/
         // Adapter - ArrayAdapter - UserAdapter
-        ListAdapter adapter = new ListAdapter(getActivity(), 0, users);
+  //      ListAdapter adapter = new ListAdapter(getActivity(), 0, users);
 
         // ListViewに表示
-        listView.setAdapter(adapter);
+    //    listView.setAdapter(adapter);
 
         // セルのクリックで編集フラグメントへデータを送る
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                FragmentManager fragmentManager = getFragmentManager();
@@ -100,7 +129,7 @@ public class BookListFragment extends Fragment  {
                bundle.putString("titleText",customData.getTitle());
                bundle.putString("priceText",customData.getPrice());
                bundle.putString("dateText",customData.getDate());
-               int selectedImage = icons[position];
+             //  int selectedImage = icons[position];
             //   bundle.putExtra("image",selectedImage);
                //値を書き込む
                bookEditFragment.setArguments(bundle);
@@ -108,7 +137,7 @@ public class BookListFragment extends Fragment  {
 
     }
          });
-        return listFragment;
+        return v;
     }
 
     //アクションバーの設定
@@ -116,7 +145,6 @@ public class BookListFragment extends Fragment  {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-
         getActivity().setTitle("書籍一覧");
     }
 
@@ -139,8 +167,63 @@ public class BookListFragment extends Fragment  {
         return true;
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    @Override
+    public void didConnection(StringBuffer result) {
+       ArrayList<CustomData> objects = new ArrayList<>();
+    //    List<CustomData> objects = new ArrayList<CustomData>();
+
+
+        try {
+            JSONObject jsonObject = new JSONObject(String.valueOf(result));
+            JSONArray jsonArray = jsonObject.getJSONArray("result");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                jsonObject = jsonArray.getJSONObject(i);
+                CustomData item = new CustomData();
+
+                SimpleDateFormat date1 = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss ZZZZZ");
+                SimpleDateFormat date2;
+                date2 = new SimpleDateFormat("yyyy/MM/dd");
+                Date date = null;
+
+                String title = jsonObject.getString("name");
+                String price = jsonObject.getString("price");
+                date = date1.parse(jsonObject.getString("purchase_date"));
+
+                String formattedDate = "";
+                formattedDate = date2.format(date);
+
+          //      item.setImageData(image);
+
+                item.setTitle(title);
+                item.setPrice(price);
+                item.setDate(formattedDate);
+
+                objects.add(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ListAdapter customAdapter = new ListAdapter(getActivity(),0,objects);
+        mListView.setAdapter(customAdapter);
     }
 }
+// データを準備
+//        ArrayList<CustomData> users = new ArrayList<>();
+
+/*        for (int i = 0; i < icons.length; i++) {
+            CustomData customData = new CustomData();
+            customData.setIcon(BitmapFactory.decodeResource(
+                    getResources(),
+                    icons[i]
+            ));
+            customData.setTitle(titles[i]);
+            customData.setPrice(prices[i]);
+            customData.setDate(dates[i]);
+            users.add(custoomData);
+        }
+*/
+// Adapter - ArrayAdapter - UserAdapter
+//      ListAdapter adapter = new ListAdapter(getActivity(), 0, users);
+
+// ListViewに表示
+//    listView.setAdapter(adapter);

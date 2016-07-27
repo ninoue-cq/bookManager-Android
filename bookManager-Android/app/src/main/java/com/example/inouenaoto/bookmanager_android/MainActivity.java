@@ -16,7 +16,8 @@ public class MainActivity extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final ActionBar actionBar = getActionBar();
-        setContentView(R.layout.activity_main);
+
+       setContentView(R.layout.activity_main);
         //final ActionBar actionBar = getActionBar();
 
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
