@@ -59,8 +59,8 @@ public class BookListFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_book_list, container, false);
-        ListView myListView = (ListView) v.findViewById(R.id.myBookListView);
+        View listFragment= inflater.inflate(R.layout.fragment_book_list, container, false);
+        ListView listView = (ListView) listFragment.findViewById(R.id.myBookListView);
 
       //  myListView.setOnItemClickListener(this);
 
@@ -108,10 +108,10 @@ public class BookListFragment extends Fragment  {
         UserAdapter adapter = new UserAdapter(getActivity(), 0, users);
 
         // ListViewに表示
-        myListView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
         // セルのクリックで編集フラグメントへデータを送る
-         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                FragmentManager fragmentManager = getFragmentManager();
@@ -131,27 +131,10 @@ public class BookListFragment extends Fragment  {
                //値を書き込む
                bookEditFragment.setArguments(bundle);
                transaction.replace(R.id.container, bookEditFragment).commit();
-               //transaction.commit();
-
-/*   フラグメントへはこのやり方じゃ渡せない（念のためまだ残している）
-             Intent intent = new Intent(getActivity(), BookEditActivity.class);
-        // clickされたpositionのtextとphotoのID
-              String selectedTitle = titles[position];
-               String selectedPrice = prices[position];
-               String selectedDate = dates[position];
-               int selectedImage = icons[position];
-         // インテントにセット
-             intent.putExtra("titleText", selectedTitle);
-               intent.putExtra("priceText", selectedPrice);
-               intent.putExtra("dateText", selectedDate);
-               intent.putExtra("imageView", selectedImage);
-               intent.putExtra(send_POSITION, position);
-             startActivity(intent);
-*/
 
     }
          });
-        return v;
+        return listFragment;
     }
     public class UserAdapter extends ArrayAdapter<User> {
 

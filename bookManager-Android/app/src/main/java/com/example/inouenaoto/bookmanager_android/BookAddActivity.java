@@ -44,7 +44,6 @@ public class BookAddActivity extends Activity  {
         findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView imgView=(ImageView) findViewById(R.id.bookImage);
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -101,14 +100,14 @@ public class BookAddActivity extends Activity  {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
       //  super.onActivityResult(requestCode, resultCode, data);
         // TODO Auto-generated method stub
-        ImageView imgView=(ImageView) findViewById(R.id.bookImage);
+        ImageView bookImageView = (ImageView) findViewById(R.id.bookImage);
         if(requestCode == mREQUEST_GALLERY && resultCode == RESULT_OK) {
             try {
-                InputStream in = getContentResolver().openInputStream(data.getData());
-                Bitmap img = BitmapFactory.decodeStream(in);
-                in.close();
+                InputStream inputStream = getContentResolver().openInputStream(data.getData());
+                Bitmap img = BitmapFactory.decodeStream(inputStream);
+                inputStream.close();
                 // 選択した画像を表示
-                imgView.setImageBitmap(img);
+                bookImageView.setImageBitmap(img);
                 } catch (Exception e) {
 
                 }

@@ -34,7 +34,7 @@ public class BookEditFragment extends Fragment {
     public BookEditFragment() {}
 
     private static final int mREQUEST_GALLERY = 0;
-    private ImageView mImgView;
+    private ImageView mBookImageView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class BookEditFragment extends Fragment {
         v.findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mImgView=(ImageView) v.findViewById(R.id.bookImage);
+                mBookImageView=(ImageView) v.findViewById(R.id.bookImage);
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -134,14 +134,13 @@ public class BookEditFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //  super.onActivityResult(requestCode, resultCode, data);
         // TODO Auto-generated method stub
-       // ImageView imgView=(ImageView) findViewById(R.id.bookImage);
         if(requestCode == mREQUEST_GALLERY && resultCode == Activity.RESULT_OK) {
             try {
-                InputStream in = getActivity().getContentResolver().openInputStream(data.getData());
-                Bitmap img = BitmapFactory.decodeStream(in);
-                in.close();
+                InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
+                Bitmap img = BitmapFactory.decodeStream(inputStream);
+                inputStream.close();
                 // 選択した画像を表示
-                mImgView.setImageBitmap(img);
+                mBookImageView.setImageBitmap(img);
             } catch (Exception e) {
 
             }

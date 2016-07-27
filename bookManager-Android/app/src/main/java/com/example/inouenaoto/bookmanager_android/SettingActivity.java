@@ -12,9 +12,9 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         //タブの設定
-        TextView view = new TextView(this);
-        view.setText("Tab2");
-        setContentView(view);
+        TextView textView = new TextView(this);
+        textView.setText("Tab2");
+        setContentView(textView);
 
     }
 }

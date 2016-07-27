@@ -37,11 +37,7 @@ public class SettingFragment extends Fragment {
         Button btnDisp = (Button)v.findViewById(R.id.settingButton);
         btnDisp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Sub 画面を起動
-                Intent intent = new Intent();
-                   intent.setClassName("com.example.inouenaoto.bookmanager_android",
-                        "com.example.inouenaoto.bookmanager_android.AccountSettingActivity");
-           //     Intent intent = new Intent(getActivity(), AccountSettingActivity.class);
+                Intent intent = new Intent(getActivity(), AccountSettingActivity.class);
                 startActivity(intent);
             }
         });
