@@ -6,39 +6,46 @@ import android.graphics.Bitmap;
  * Created by inouenaoto on 2016/07/27.
  */
 public class CustomData {
-    private Bitmap micon;
-    private String mtitle;
-    private String mprice;
-    private String mdate;
+    private Bitmap mIcon;
+    private String mId;
+    private String mTitle;
+    private String mPrice;
+    private String mDate;
 
     public String getPrice() {
-        return mprice;
+        return mPrice;
     }
 
     public void setPrice(String price) {
-        mprice = price;
+        mPrice = price;
     }
 
     public String getDate() {
-        return mdate;
+        return mDate;
     }
 
     public void setDate(String date) {
-        mdate = date;
+        mDate = date;
     }
     public Bitmap getIcon() {
-        return micon;
+        return mIcon;
     }
 
     public void setIcon(Bitmap icon) {
-        micon = icon;
+        mIcon = icon;
     }
 
     public String getTitle() {
-        return mtitle;
+        return mTitle;
     }
     public void setTitle(String title) {
-        mtitle = title;
+        mTitle = title;
     }
 
+    public String getId() {
+        return mId;
+    }
+    public void setId(String id) {
+        mId = id;
+    }
 }

@@ -73,6 +73,7 @@ public class BookListFragment extends Fragment implements APIListener {
                bundle.putString("titleText",customData.getTitle());
                bundle.putString("priceText",customData.getPrice());
                bundle.putString("dateText",customData.getDate());
+               bundle.putString("bookId",customData.getId());
                //int selectedImage = customData.micons[position];
                bundle.putInt("image",micons);
              //  bundle.putExtra("selectedImage",customData.getIcon());
@@ -130,11 +131,13 @@ public class BookListFragment extends Fragment implements APIListener {
 
                 String title = jsonObject.getString("name");
                 String price = jsonObject.getString("price");
+                String id =jsonObject.getString("id");
                 Date  date = beforeDate.parse(jsonObject.getString("purchase_date"));
 
                 String formatedDate = "";
                 formatedDate = afterDate.format(date);
 
+                item.setId(id);
                 item.setTitle(title);
                 item.setPrice(price);
                 item.setDate(formatedDate);

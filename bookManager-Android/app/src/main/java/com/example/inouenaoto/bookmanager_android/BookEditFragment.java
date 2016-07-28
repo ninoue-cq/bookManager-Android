@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,8 +34,15 @@ public class BookEditFragment extends Fragment {
 
     public BookEditFragment() {}
 
+    public String mBookId;
+    private  EditText mEditBookTitle;
+    private  EditText mEditBookPrice;
+    private  EditText mEditBookDate;
+
+
     private static final int mREQUEST_GALLERY = 0;
     private ImageView mBookImageView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,19 +55,22 @@ public class BookEditFragment extends Fragment {
         String title = getArguments().getString("titleText");
         String price = getArguments().getString("priceText");
         String date = getArguments().getString("dateText");
+
+        mBookId=getArguments().getString("bookId");
+
         int image = getArguments().getInt("image");
         Bitmap imaged=BitmapFactory.decodeResource(
                 getResources(),
                 image);
 
-        EditText editTitle = (EditText) v.findViewById(R.id.edit_book_title);
-        EditText editPrice = (EditText) v.findViewById(R.id.edit_book_price);
-        EditText editDate = (EditText) v.findViewById(R.id.edit_book_date);
+        mEditBookTitle = (EditText) v.findViewById(R.id.edit_book_title);
+        mEditBookPrice = (EditText) v.findViewById(R.id.edit_book_price);
+        mEditBookDate= (EditText) v.findViewById(R.id.edit_book_date);
         ImageView editImage = (ImageView)  v.findViewById(R.id.book_image);
 
-        editTitle.setText(title);
-        editPrice.setText(price);
-        editDate.setText(date);
+        mEditBookTitle.setText(title);
+        mEditBookPrice.setText(price);
+        mEditBookDate.setText(date);
         editImage.setImageBitmap(imaged);
 
         //画像添付ボタンの処理
@@ -115,6 +126,7 @@ public class BookEditFragment extends Fragment {
 
         inflater.inflate(R.menu.edit_menu, menu);
     }
+
     //アクションバーのボタンイベントのハンドリング
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -130,7 +142,33 @@ public class BookEditFragment extends Fragment {
                         .commit();
                 break;
             case R.id.save_button:
-                //編集データをサーバーに送る処理を書く
+                //編集データをサーバーに送る処理 長いのでメソッドにすべきかもしれない
+                final String titleText =mEditBookTitle.getText().toString();
+                final String priceText = mEditBookPrice.getText().toString();
+                final String dateText = mEditBookDate.getText().toString();
+
+                if (titleText.length() == 0 || priceText.length() == 0 || dateText.length() == 0) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                    alertDialog.setMessage("未入力項目があります");
+                    alertDialog.setPositiveButton("確認",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                    alertDialog.show();
+                } else {
+                    new BookDataEdit(getActivity()).execute(titleText, priceText, dateText,mBookId);
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                    alertDialog.setMessage("編集完了しました");
+                    alertDialog.setPositiveButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface daialg, int which) {
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                    alertDialog.show();
+                }
                 break;
         }
         return true;

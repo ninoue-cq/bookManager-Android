@@ -96,6 +96,7 @@ public class BookAddActivity extends Activity {
                 break;
             case R.id.save_button:
                 //書籍追加の処理 長いのでメソッドにしたほうがいいのかもしれない
+
                 EditText bookTitle = (EditText) findViewById(R.id.add_book_title);
                 final String addBookTitle = bookTitle.getText().toString();
 
