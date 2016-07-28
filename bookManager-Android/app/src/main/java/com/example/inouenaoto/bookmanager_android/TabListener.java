@@ -13,13 +13,11 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
     private Fragment mFragment;
     private final Activity mActivity;
     private final String mTag;
-//    private final Class<T> mClass;
-    private final Class mClass;
+
     //コンストラクタ
     public TabListener(Activity activity, String tag, Class<T> clz) {
         mActivity = activity;
         mTag = tag;
-        mClass = clz;
         mFragment = mActivity.getFragmentManager().findFragmentByTag(mTag);
     }
 

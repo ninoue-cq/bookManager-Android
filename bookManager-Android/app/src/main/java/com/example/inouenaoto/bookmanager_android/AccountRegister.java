@@ -1,7 +1,7 @@
-
 package com.example.inouenaoto.bookmanager_android;
 
 import android.os.AsyncTask;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,28 +11,27 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by inouenaoto on 2016/07/27.
+ * Created by inouenaoto on 2016/07/28.
  */
 
-public class BookListGet extends AsyncTask<Void, Void, StringBuffer> {
+public class AccountRegister extends AsyncTask<String, Integer, String> {
     StringBuffer buffer;
-    private APIListener mAPIListener;
 
-    public void setAPIListener(APIListener apiListener) {
-        this.mAPIListener = apiListener;
-    }
     @Override
-    protected StringBuffer doInBackground(Void... voids) {
-        HttpURLConnection connection = null;
+    protected String doInBackground(String... params) {
+        String mailAddress = params[0];
+        String password = params[1];
 
+        HttpURLConnection connection = null;
         try {
-            URL url = new URL("http://app.com/book/get");
+            URL url = new URL("http://app.com/account/register");
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+            connection.setRequestMethod("POST");
             connection.setConnectTimeout(1000);
             connection.setDoOutput(true);
 
-            String postData = "page=1-100";
+            String postText = String.format("mail_address=%s&password=%s", mailAddress, password);
+            String postData = postText;
             OutputStream outputStream = connection.getOutputStream();
             outputStream.write(postData.getBytes());
             outputStream.flush();
@@ -53,16 +52,6 @@ public class BookListGet extends AsyncTask<Void, Void, StringBuffer> {
             connection.disconnect();
         }
 
-        return buffer;
-    }
-
-    @Override
-    protected void onPostExecute(StringBuffer result) {
-        try {
-            mAPIListener.didConnection(result);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return buffer.toString();
     }
 }
