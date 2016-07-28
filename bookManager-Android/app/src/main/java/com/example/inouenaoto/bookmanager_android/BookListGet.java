@@ -23,7 +23,6 @@ public class BookListGet extends AsyncTask<Void, Void, StringBuffer> {
     public void setAPIListener(APIListener apiListener) {
         this.mAPIListener = apiListener;
     }
-
     @Override
     protected StringBuffer doInBackground(Void... voids) {
         HttpURLConnection connection = null;

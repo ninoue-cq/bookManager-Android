@@ -20,22 +20,27 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.InputStream;
 
-public class BookAddActivity extends Activity  {
+public class BookAddActivity extends Activity {
 
     // 日付設定ダイアログのインスタンスを格納する変数
     private DatePickerDialog.OnDateSetListener DateSetListener;
     private static final int mREQUEST_GALLERY = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_add);
         setTitle("書籍追加");
+
+        //bookAddActivity = this;
 
         EditText setDateText = (EditText) findViewById(R.id.add_book_date);
         setDateText.setOnClickListener(new SetDateTextAction());
@@ -90,7 +95,18 @@ public class BookAddActivity extends Activity  {
                 finish();
                 break;
             case R.id.save_button:
-                //書籍追加の処理をここに書く
+                //書籍追加の処理 
+                EditText bookTitle = (EditText) findViewById(R.id.add_book_title);
+                final String addBookTitle = bookTitle.getText().toString();
+
+                EditText bookPrice = (EditText) findViewById(R.id.add_book_price);
+                final String addPriceText = bookPrice.getText().toString();
+
+                EditText bookDate = (EditText) findViewById(R.id.add_book_date);
+                final String addDateText = bookDate.getText().toString();
+                new BookDataAdd().execute(addBookTitle, addPriceText, addDateText);
+                Intent intent = new Intent(BookAddActivity.this, MainActivity.class);
+                startActivity(intent);
                 break;
         }
         return true;
@@ -98,21 +114,20 @@ public class BookAddActivity extends Activity  {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-      //  super.onActivityResult(requestCode, resultCode, data);
+        //  super.onActivityResult(requestCode, resultCode, data);
         // TODO Auto-generated method stub
         ImageView bookImageView = (ImageView) findViewById(R.id.book_image);
-        if(requestCode == mREQUEST_GALLERY && resultCode == RESULT_OK) {
+        if (requestCode == mREQUEST_GALLERY && resultCode == RESULT_OK) {
             try {
                 InputStream inputStream = getContentResolver().openInputStream(data.getData());
                 Bitmap img = BitmapFactory.decodeStream(inputStream);
                 inputStream.close();
                 // 選択した画像を表示
                 bookImageView.setImageBitmap(img);
-                } catch (Exception e) {
+            } catch (Exception e) {
 
-                }
             }
         }
+    }
+
 }
-
-

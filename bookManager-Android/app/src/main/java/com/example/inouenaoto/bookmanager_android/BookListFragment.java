@@ -53,9 +53,9 @@ public class BookListFragment extends Fragment implements APIListener {
         mThisFragment = this;
 
         //書籍一覧のデータの取得
-        BookListGet getBookData = new BookListGet();
-        getBookData.setAPIListener(mThisFragment);
-        getBookData.execute();
+        BookListGet bookListGet = new BookListGet();
+        bookListGet.setAPIListener(mThisFragment);
+        bookListGet.execute();
 
         // セルのクリックで編集フラグメントへデータを送る
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
