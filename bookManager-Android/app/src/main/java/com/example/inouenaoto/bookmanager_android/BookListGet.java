@@ -2,6 +2,8 @@
 package com.example.inouenaoto.bookmanager_android;
 
 import android.os.AsyncTask;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +23,7 @@ public class BookListGet extends AsyncTask<Void, Void, StringBuffer> {
     public void setAPIListener(APIListener apiListener) {
         this.mAPIListener = apiListener;
     }
+
     @Override
     protected StringBuffer doInBackground(Void... voids) {
         HttpURLConnection connection = null;

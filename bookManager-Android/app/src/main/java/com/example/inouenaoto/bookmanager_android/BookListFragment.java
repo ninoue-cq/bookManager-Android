@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -44,9 +45,16 @@ public class BookListFragment extends Fragment implements APIListener{
     private int micons = R.mipmap.ic_launcher;
     public BookListFragment() {}
 
-    private ArrayList<CustomData> mObjects = new ArrayList<>();
+    private ArrayList<CustomData> mObjects;
     private ListAdapter mCustomAdapter;
     private int mTotal = 0;
+
+    private int page = 0;
+    private int page_rows = 20;
+    private int offset = page * page_rows;
+    private View myFooter;
+    private AsyncTask<Void,Void,Void> myTask;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,7 +64,19 @@ public class BookListFragment extends Fragment implements APIListener{
         mListView = (ListView) v.findViewById(R.id.my_book_listView);
 
         mThisFragment = this;
-        //Log.d("%d",Integer.toString(COUNT));
+
+//ここから
+        mObjects=new ArrayList<>();
+        mCustomAdapter = new ListAdapter(getActivity(),0,mObjects);
+        mListView.setAdapter(mCustomAdapter);
+
+     //   mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+       //                               });
+        //footer
+        myFooter = getActivity().getLayoutInflater().inflate(R.layout.lisr_footer,null);
+        mListView.addFooterView(myFooter);
+
+//ここまで
         //書籍一覧のデータの取得
         BookListGet bookListGet = new BookListGet();
         bookListGet.setAPIListener(mThisFragment);
@@ -159,11 +179,11 @@ public class BookListFragment extends Fragment implements APIListener{
         } catch (Exception e) {
             e.printStackTrace();
         }
-    //    ListAdapter customAdapter = new ListAdapter(getActivity(),0,mObjects);
+        ListAdapter customAdapter = new ListAdapter(getActivity(),0,mObjects);
         mCustomAdapter = new ListAdapter(getActivity(),0,mObjects);
-        mListView.setAdapter(mCustomAdapter);
-        mTotal=mObjects.size();
-        Log.d("トータル",Integer.toString(mTotal));
+    //    mListView.setAdapter(mCustomAdapter);
+    //    mTotal=mObjects.size();
+    //    Log.d("トータル",Integer.toString(mTotal));
     }
 
 }
