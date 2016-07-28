@@ -47,14 +47,20 @@ public class BookEditFragment extends Fragment {
         String title = getArguments().getString("titleText");
         String price = getArguments().getString("priceText");
         String date = getArguments().getString("dateText");
+        int image = getArguments().getInt("image");
+        Bitmap imaged=BitmapFactory.decodeResource(
+                getResources(),
+                image);
 
         EditText editTitle = (EditText) v.findViewById(R.id.edit_book_title);
         EditText editPrice = (EditText) v.findViewById(R.id.edit_book_price);
         EditText editDate = (EditText) v.findViewById(R.id.edit_book_date);
+        ImageView editImage = (ImageView)  v.findViewById(R.id.book_image);
 
         editTitle.setText(title);
         editPrice.setText(price);
         editDate.setText(date);
+        editImage.setImageBitmap(imaged);
 
         //画像添付ボタンの処理
         v.findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {

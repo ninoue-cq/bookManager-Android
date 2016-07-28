@@ -40,7 +40,6 @@ public class BookListFragment extends Fragment implements APIListener {
     private ListView mListView;
     private BookListFragment mThisFragment;
     private int micons = R.mipmap.ic_launcher;
-
     public BookListFragment() {}
 
     @Override
@@ -76,7 +75,7 @@ public class BookListFragment extends Fragment implements APIListener {
                bundle.putString("dateText",customData.getDate());
                //int selectedImage = customData.micons[position];
                bundle.putInt("image",micons);
-                //bundle.putExtra("selectedImage",customData.getIcon());
+             //  bundle.putExtra("selectedImage",customData.getIcon());
 
                //値を書き込む
                bookEditFragment.setArguments(bundle);
@@ -127,7 +126,7 @@ public class BookListFragment extends Fragment implements APIListener {
 
                 //購入日の書式変更
                 SimpleDateFormat beforeDate = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss ZZZZ");
-                SimpleDateFormat afterDate =  new SimpleDateFormat("yyyy/MM/dd");;
+                SimpleDateFormat afterDate =  new SimpleDateFormat("yyyy/MM/dd");
 
                 String title = jsonObject.getString("name");
                 String price = jsonObject.getString("price");
