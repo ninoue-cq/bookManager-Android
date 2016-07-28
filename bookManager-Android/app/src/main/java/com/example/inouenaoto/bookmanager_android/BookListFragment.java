@@ -17,10 +17,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -35,27 +37,33 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 
-public class BookListFragment extends Fragment implements APIListener {
+public class BookListFragment extends Fragment implements APIListener{
 
     private ListView mListView;
     private BookListFragment mThisFragment;
     private int micons = R.mipmap.ic_launcher;
     public BookListFragment() {}
 
+    private ArrayList<CustomData> mObjects = new ArrayList<>();
+    private ListAdapter mCustomAdapter;
+    private int mTotal = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
 
         View v= inflater.inflate(R.layout.fragment_book_list, container, false);
         mListView = (ListView) v.findViewById(R.id.my_book_listView);
 
         mThisFragment = this;
-
+        //Log.d("%d",Integer.toString(COUNT));
         //書籍一覧のデータの取得
         BookListGet bookListGet = new BookListGet();
         bookListGet.setAPIListener(mThisFragment);
         bookListGet.execute();
+
+//        int COUNT = mObjects.size();
+        Log.d("総数",Integer.toString(mObjects.size()));
 
         // セルのクリックで編集フラグメントへデータを送る
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,17 +91,18 @@ public class BookListFragment extends Fragment implements APIListener {
                transaction.replace(R.id.container, bookEditFragment).commit();
 
     }
-         });
+        });
         return v;
     }
-
     //アクションバーの設定
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
         getActivity().setTitle("書籍一覧");
+
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -116,7 +125,7 @@ public class BookListFragment extends Fragment implements APIListener {
 
     @Override
     public void didConnection(StringBuffer result) {
-       ArrayList<CustomData> objects = new ArrayList<>();
+   //    ArrayList<CustomData> objects = new ArrayList<>();
 
         try {
             JSONObject jsonObject = new JSONObject(String.valueOf(result));
@@ -145,12 +154,16 @@ public class BookListFragment extends Fragment implements APIListener {
                         getResources(),
                         micons
                 ));
-                objects.add(item);
+                mObjects.add(item);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ListAdapter customAdapter = new ListAdapter(getActivity(),0,objects);
-        mListView.setAdapter(customAdapter);
+    //    ListAdapter customAdapter = new ListAdapter(getActivity(),0,mObjects);
+        mCustomAdapter = new ListAdapter(getActivity(),0,mObjects);
+        mListView.setAdapter(mCustomAdapter);
+        mTotal=mObjects.size();
+        Log.d("トータル",Integer.toString(mTotal));
     }
+
 }

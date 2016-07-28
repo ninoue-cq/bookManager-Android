@@ -7,5 +7,5 @@ package com.example.inouenaoto.bookmanager_android;
  */
 
 public interface APIListener {
-    public void didConnection(StringBuffer result);
+    void didConnection(StringBuffer result);
 }

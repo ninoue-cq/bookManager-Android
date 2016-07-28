@@ -17,7 +17,7 @@ public class MainActivity extends Activity  {
         super.onCreate(savedInstanceState);
         final ActionBar actionBar = getActionBar();
 
-       setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
         //final ActionBar actionBar = getActionBar();
 
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -32,4 +32,3 @@ public class MainActivity extends Activity  {
                         this, "tag2", SettingFragment.class)));
     }
 }
-

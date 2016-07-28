@@ -1,5 +1,6 @@
 package com.example.inouenaoto.bookmanager_android;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import java.io.BufferedReader;
@@ -13,31 +14,35 @@ import java.net.URL;
 /**
  * Created by inouenaoto on 2016/07/28.
  */
-
-public class AccountRegister extends AsyncTask<String, Integer, String> {
+public class Login extends AsyncTask<String, Integer, String> {
     StringBuffer buffer;
+    Context context;
+
+    public Login(Context context) {
+        this.context = context;
+    }
 
     @Override
     protected String doInBackground(String... params) {
-        String mailAddress = params[0];
-        String password = params[1];
+        String mMailAddress = params[0];
+        String mPassword = params[1];
 
-        HttpURLConnection conn = null;
+        HttpURLConnection connection = null;
         try {
-            URL url = new URL("http://app.com/account/register");
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setConnectTimeout(1000);
-            conn.setDoOutput(true);
+            URL url = new URL("http://app.com/account/login");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setConnectTimeout(1000);
+            connection.setDoOutput(true);
 
-            String postText = String.format("mail_address=%s&password=%s", mailAddress, password);
+            String postText = String.format("mail_address=%s&password=%s", mMailAddress, mPassword);
             String postData = postText;
-            OutputStream outputStream = conn.getOutputStream();
+            OutputStream outputStream = connection.getOutputStream();
             outputStream.write(postData.getBytes());
             outputStream.flush();
             outputStream.close();
 
-            InputStream inputStream = conn.getInputStream();
+            InputStream inputStream = connection.getInputStream();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             buffer = new StringBuffer();
@@ -49,7 +54,7 @@ public class AccountRegister extends AsyncTask<String, Integer, String> {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            conn.disconnect();
+            connection.disconnect();
         }
 
         return buffer.toString();

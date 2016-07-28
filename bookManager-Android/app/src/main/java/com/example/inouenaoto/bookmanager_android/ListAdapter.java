@@ -37,6 +37,7 @@ public class ListAdapter extends ArrayAdapter<CustomData> {
                 .setImageBitmap(item.getIcon());
         ((TextView) convertView.findViewById(R.id.title))
                 .setText(item.getTitle());
+
         ((TextView) convertView.findViewById(R.id.price))
                 .setText(item.getPrice()+ "円+税");
         ((TextView) convertView.findViewById(R.id.date))

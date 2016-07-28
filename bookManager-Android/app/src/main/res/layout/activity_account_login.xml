@@ -44,7 +44,8 @@
                 android:hint="メールアドレスを入力してください"
                 android:id="@+id/mail_adress"
                 android:layout_below="@+id/text_adress"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:layout_alignEnd="@+id/password" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/password"
                 android:text="ログイン"
+                android:id="@+id/login_button"
                 android:layout_marginTop="50dp"
                 android:layout_marginLeft="60dp"
                 android:layout_marginRight="60dp"
