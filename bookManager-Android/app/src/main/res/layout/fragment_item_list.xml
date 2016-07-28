@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="com.example.inouenaoto.bookmanager_android.ItemFragment"
-    tools:listitem="@layout/fragment_item" />
+    tools:listitem="@layout/fragment_item_list" />
