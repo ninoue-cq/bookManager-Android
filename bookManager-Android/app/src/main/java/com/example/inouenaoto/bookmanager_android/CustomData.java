@@ -11,7 +11,6 @@ public class CustomData {
     private String mprice;
     private String mdate;
 
-
     public String getPrice() {
         return mprice;
     }

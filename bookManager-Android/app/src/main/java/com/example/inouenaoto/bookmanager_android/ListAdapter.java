@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by inouenaoto on 2016/07/27.
  */
@@ -18,7 +16,7 @@ public class ListAdapter extends ArrayAdapter<CustomData> {
 
     private LayoutInflater layoutInflater;
 
-    public ListAdapter(Context context, int id, List<CustomData> objects) {
+    public ListAdapter(Context context, int id, ArrayList<CustomData> objects) {
         super(context, id, objects);
         this.layoutInflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE
@@ -39,7 +37,6 @@ public class ListAdapter extends ArrayAdapter<CustomData> {
                 .setImageBitmap(item.getIcon());
         ((TextView) convertView.findViewById(R.id.title))
                 .setText(item.getTitle());
-
         ((TextView) convertView.findViewById(R.id.price))
                 .setText(item.getPrice()+ "円+税");
         ((TextView) convertView.findViewById(R.id.date))

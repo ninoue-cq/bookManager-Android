@@ -39,79 +39,24 @@ public class BookListFragment extends Fragment implements APIListener {
 
     private ListView mListView;
     private BookListFragment mThisFragment;
-    public BookListFragment() {
-        // Required empty public constructor
-    }
+    private int micons = R.mipmap.ic_launcher;
 
-/*
-    public static final int[] icons = {
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher
-    };
+    public BookListFragment() {}
 
-    public static final String[] titles = {
-            "book1",
-            "book2",
-            "book3"
-    };
-
-    public static final String[] prices = {
-            "1200",
-            "1500",
-            "1600"
-    };
-
-    public static final String[] dates = {
-            "2014年 7月20日 ",
-            "2014年 8月20日 ",
-            "2014年 9月20日 "
-    };
-
-*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-
-    //    ListView mlistView = (ListView) listFragment.findViewById(R.id.my_book_listView);
-
-        mThisFragment = this;
-
-        (new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //ここで一覧の取得をしたい
-                BookListGet getBookData = new BookListGet();
-                getBookData.setAPIListener(mThisFragment);
-                getBookData.execute();
-            }
-        })).start();
 
         View v= inflater.inflate(R.layout.fragment_book_list, container, false);
         mListView = (ListView) v.findViewById(R.id.my_book_listView);
 
-        // データを準備
-//        ArrayList<CustomData> users = new ArrayList<>();
+        mThisFragment = this;
 
-/*        for (int i = 0; i < icons.length; i++) {
-            CustomData customData = new CustomData();
-            customData.setIcon(BitmapFactory.decodeResource(
-                    getResources(),
-                    icons[i]
-            ));
-            customData.setTitle(titles[i]);
-            customData.setPrice(prices[i]);
-            customData.setDate(dates[i]);
-            users.add(custoomData);
-        }
-*/
-        // Adapter - ArrayAdapter - UserAdapter
-  //      ListAdapter adapter = new ListAdapter(getActivity(), 0, users);
-
-        // ListViewに表示
-    //    listView.setAdapter(adapter);
+        //書籍一覧のデータの取得
+        BookListGet getBookData = new BookListGet();
+        getBookData.setAPIListener(mThisFragment);
+        getBookData.execute();
 
         // セルのクリックで編集フラグメントへデータを送る
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -129,8 +74,10 @@ public class BookListFragment extends Fragment implements APIListener {
                bundle.putString("titleText",customData.getTitle());
                bundle.putString("priceText",customData.getPrice());
                bundle.putString("dateText",customData.getDate());
-             //  int selectedImage = icons[position];
-            //   bundle.putExtra("image",selectedImage);
+               //int selectedImage = customData.micons[position];
+               bundle.putInt("image",micons);
+                //bundle.putExtra("selectedImage",customData.getIcon());
+
                //値を書き込む
                bookEditFragment.setArguments(bundle);
                transaction.replace(R.id.container, bookEditFragment).commit();
@@ -170,8 +117,6 @@ public class BookListFragment extends Fragment implements APIListener {
     @Override
     public void didConnection(StringBuffer result) {
        ArrayList<CustomData> objects = new ArrayList<>();
-    //    List<CustomData> objects = new ArrayList<CustomData>();
-
 
         try {
             JSONObject jsonObject = new JSONObject(String.valueOf(result));
@@ -180,24 +125,24 @@ public class BookListFragment extends Fragment implements APIListener {
                 jsonObject = jsonArray.getJSONObject(i);
                 CustomData item = new CustomData();
 
-                SimpleDateFormat date1 = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss ZZZZZ");
-                SimpleDateFormat date2;
-                date2 = new SimpleDateFormat("yyyy/MM/dd");
-                Date date = null;
+                //購入日の書式変更
+                SimpleDateFormat beforeDate = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss ZZZZ");
+                SimpleDateFormat afterDate =  new SimpleDateFormat("yyyy/MM/dd");;
 
                 String title = jsonObject.getString("name");
                 String price = jsonObject.getString("price");
-                date = date1.parse(jsonObject.getString("purchase_date"));
+                Date  date = beforeDate.parse(jsonObject.getString("purchase_date"));
 
-                String formattedDate = "";
-                formattedDate = date2.format(date);
-
-          //      item.setImageData(image);
+                String formatedDate = "";
+                formatedDate = afterDate.format(date);
 
                 item.setTitle(title);
                 item.setPrice(price);
-                item.setDate(formattedDate);
-
+                item.setDate(formatedDate);
+                item.setIcon(BitmapFactory.decodeResource(
+                        getResources(),
+                        micons
+                ));
                 objects.add(item);
             }
         } catch (Exception e) {
@@ -207,23 +152,3 @@ public class BookListFragment extends Fragment implements APIListener {
         mListView.setAdapter(customAdapter);
     }
 }
-// データを準備
-//        ArrayList<CustomData> users = new ArrayList<>();
-
-/*        for (int i = 0; i < icons.length; i++) {
-            CustomData customData = new CustomData();
-            customData.setIcon(BitmapFactory.decodeResource(
-                    getResources(),
-                    icons[i]
-            ));
-            customData.setTitle(titles[i]);
-            customData.setPrice(prices[i]);
-            customData.setDate(dates[i]);
-            users.add(custoomData);
-        }
-*/
-// Adapter - ArrayAdapter - UserAdapter
-//      ListAdapter adapter = new ListAdapter(getActivity(), 0, users);
-
-// ListViewに表示
-//    listView.setAdapter(adapter);
