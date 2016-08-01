@@ -99,6 +99,7 @@
                 android:layout_alignLeft="@+id/add_book_price"
                 android:layout_alignStart="@+id/add_book_price"
                 android:layout_marginTop="10dp" />
+
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"

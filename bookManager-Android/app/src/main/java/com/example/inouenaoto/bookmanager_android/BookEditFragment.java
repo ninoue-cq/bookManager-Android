@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.EditTextPreference;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,11 +37,18 @@ public class BookEditFragment extends Fragment {
     private static final int mREQUEST_GALLERY = 0;
     private ImageView mBookImageView;
 
+    public View view;
+
+    public EditText setDateText;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.fragment_book_edit, container, false);
+    //    final View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
 
-        EditText editDate = (EditText) v.findViewById(R.id.edit_book_date);
+        view = inflater.inflate(R.layout.fragment_book_edit, container, false);
+        setDateText = (EditText) view.findViewById(R.id.edit_book_date);
+
+        EditText editDate = (EditText) view.findViewById(R.id.edit_book_date);
         editDate.setOnClickListener(new SetDateTextAction());
 
         //一覧画面から受け取った値をそれぞれのエデットテキストに反映
@@ -48,18 +56,18 @@ public class BookEditFragment extends Fragment {
         String price = getArguments().getString("priceText");
         String date = getArguments().getString("dateText");
 
-        EditText editTitle = (EditText) v.findViewById(R.id.edit_book_title);
-        EditText editPrice = (EditText) v.findViewById(R.id.edit_book_price);
+        EditText editTitle = (EditText) view.findViewById(R.id.edit_book_title);
+        EditText editPrice = (EditText) view.findViewById(R.id.edit_book_price);
     //    EditText editDate = (EditText) v.findViewById(R.id.edit_book_date);
 
         editTitle.setText(title);
         editPrice.setText(price);
         editDate.setText(date);
 
-        mBookImageView=(ImageView) v.findViewById(R.id.book_image);
+        mBookImageView=(ImageView) view.findViewById(R.id.book_image);
 
         //画像添付ボタンの処理
-        v.findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -68,30 +76,15 @@ public class BookEditFragment extends Fragment {
                 startActivityForResult(intent, mREQUEST_GALLERY);
             }
         });
-        return v;
+        return view;
     }
 
-    //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
+
+    PicckerSetting picckerSetting = new PicckerSetting();
     public class SetDateTextAction implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            final DatePicker datePicker = new DatePicker(getActivity());
-            builder.setView(datePicker);
-            builder.setTitle("日付選択");
-            builder.setPositiveButton("決定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    EditText setDateText = (EditText) v.findViewById(R.id.edit_book_date);
-                    int year = datePicker.getYear();
-                    int month = datePicker.getMonth();
-                    int day = datePicker.getDayOfMonth();
-                    setDateText.setText(year + "/" + month + "/" + day);
-                }
-            });
-            builder.setNegativeButton("キャンセル", null);
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
+            picckerSetting.pickerAppear(getActivity(),setDateText);
         }
     }
 
@@ -100,7 +93,6 @@ public class BookEditFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-
         getActivity().setTitle("書籍編集");
     }
 
