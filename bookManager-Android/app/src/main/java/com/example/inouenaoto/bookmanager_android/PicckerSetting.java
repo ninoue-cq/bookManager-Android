@@ -18,7 +18,7 @@ import android.widget.EditText;
 //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
 public class PicckerSetting {
 
-    public void pickerAppear(Activity activity,final EditText editText){
+    public void pickerAppear(Activity activity,final EditText editText) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         final DatePicker datePicker = new DatePicker(activity);
         builder.setView(datePicker);
@@ -32,10 +32,8 @@ public class PicckerSetting {
                 editText.setText(year + "/" + month + "/" + day);
             }
         });
-
         builder.setNegativeButton("キャンセル", null);
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-
 }

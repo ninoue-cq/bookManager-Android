@@ -27,8 +27,6 @@ import java.io.InputStream;
 
 public class BookAddActivity extends Activity  {
 
-    // 日付設定ダイアログのインスタンスを格納する変数
-    private DatePickerDialog.OnDateSetListener DateSetListener;
     private static final int mREQUEST_GALLERY = 0;
     public EditText mSetDateText;
 
@@ -38,7 +36,7 @@ public class BookAddActivity extends Activity  {
         setContentView(R.layout.activity_book_add);
         setTitle("書籍追加");
 
-        EditText setDateText = (EditText) findViewById(R.id.add_book_date);
+        EditText mSetDateText = (EditText) findViewById(R.id.add_book_date);
         mSetDateText.setOnClickListener(new SetDateTextAction());
 
         //画像添付ボタンの処理
@@ -54,12 +52,12 @@ public class BookAddActivity extends Activity  {
     }
 
     PicckerSetting picckerSetting = new PicckerSetting();
-   /*
-    //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
     public class SetDateTextAction implements View.OnClickListener {
-
+        @Override
+        public void onClick(final View v)book {
+            picckerSetting.pickerAppear(BookAddActivity.this,mSetDateText);
+        }
     }
-    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

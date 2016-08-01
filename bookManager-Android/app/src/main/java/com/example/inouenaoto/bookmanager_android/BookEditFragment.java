@@ -37,19 +37,18 @@ public class BookEditFragment extends Fragment {
     private static final int mREQUEST_GALLERY = 0;
     private ImageView mBookImageView;
 
-    public View view;
 
-    public EditText setDateText;
+    public EditText mSetDateText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    //    final View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
+        final View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
 
-        view = inflater.inflate(R.layout.fragment_book_edit, container, false);
-        setDateText = (EditText) view.findViewById(R.id.edit_book_date);
+        mSetDateText = (EditText) view.findViewById(R.id.edit_book_date);
 
-        EditText editDate = (EditText) view.findViewById(R.id.edit_book_date);
-        editDate.setOnClickListener(new SetDateTextAction());
+//      editDate.setOnClickListener(new SetDateTextAction());
+
+        mSetDateText.setOnClickListener(new SetDateTextAction());
 
         //一覧画面から受け取った値をそれぞれのエデットテキストに反映
         String title = getArguments().getString("titleText");
@@ -58,7 +57,7 @@ public class BookEditFragment extends Fragment {
 
         EditText editTitle = (EditText) view.findViewById(R.id.edit_book_title);
         EditText editPrice = (EditText) view.findViewById(R.id.edit_book_price);
-    //    EditText editDate = (EditText) v.findViewById(R.id.edit_book_date);
+        EditText editDate = (EditText) view.findViewById(R.id.edit_book_date);
 
         editTitle.setText(title);
         editPrice.setText(price);
@@ -84,7 +83,7 @@ public class BookEditFragment extends Fragment {
     public class SetDateTextAction implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            picckerSetting.pickerAppear(getActivity(),setDateText);
+            picckerSetting.pickerAppear(getActivity(),mSetDateText);
         }
     }
 
