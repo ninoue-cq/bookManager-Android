@@ -108,7 +108,7 @@ public class BookListFragment extends Fragment implements APIListener{
                bundle.putString("dateText", customData.getDate());
                bundle.putString("bookId", customData.getId());
                bundle.putInt("image", micons);
-               
+
                bookEditFragment.setArguments(bundle);
                transaction.replace(R.id.container, bookEditFragment).commit();
            }
