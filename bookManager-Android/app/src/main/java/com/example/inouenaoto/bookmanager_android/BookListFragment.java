@@ -105,8 +105,7 @@ public class BookListFragment extends Fragment  {
                //値を書き込む
                bookEditFragment.setArguments(bundle);
                transaction.replace(R.id.container, bookEditFragment).commit();
-
-    }
+           }
          });
         return listFragment;
     }

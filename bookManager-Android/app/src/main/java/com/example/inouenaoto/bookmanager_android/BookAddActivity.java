@@ -54,7 +54,7 @@ public class BookAddActivity extends Activity  {
     PicckerSetting picckerSetting = new PicckerSetting();
     public class SetDateTextAction implements View.OnClickListener {
         @Override
-        public void onClick(final View v)book {
+        public void onClick(final View v) {
             picckerSetting.pickerAppear(BookAddActivity.this,mSetDateText);
         }
     }
@@ -92,10 +92,9 @@ public class BookAddActivity extends Activity  {
                 // 選択した画像を表示
                 bookImageView.setImageBitmap(img);
                 } catch (Exception e) {
-
-                }
             }
         }
+    }
 }
 
 
