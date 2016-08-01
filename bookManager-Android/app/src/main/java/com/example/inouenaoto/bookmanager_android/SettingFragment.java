@@ -39,7 +39,7 @@ public class SettingFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        getActivity().setTitle("設定");
+        getActivity().setTitle(R.string.setting_title);
     }
         // TODO: Rename method, update argument and hook method into UI event
 }

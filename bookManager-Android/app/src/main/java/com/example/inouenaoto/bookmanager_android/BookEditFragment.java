@@ -116,7 +116,7 @@ public class BookEditFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        getActivity().setTitle("書籍編集");
+        getActivity().setTitle(R.string.book_edit_title);
     }
 
     @Override
@@ -147,8 +147,8 @@ public class BookEditFragment extends Fragment {
 
                 if (titleText.length() == 0 || priceText.length() == 0 || dateText.length() == 0) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-                    alertDialog.setMessage("未入力項目があります");
-                    alertDialog.setPositiveButton("確認",
+                    alertDialog.setMessage(R.string.not_entered_message);
+                    alertDialog.setPositiveButton(R.string.confirm,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                 }
@@ -157,8 +157,8 @@ public class BookEditFragment extends Fragment {
                 } else {
                     new BookDataEdit(getActivity()).execute(titleText, priceText, dateText,mBookId);
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-                    alertDialog.setMessage("編集完了しました");
-                    alertDialog.setPositiveButton("OK",
+                    alertDialog.setMessage(R.string.edit_complete);
+                    alertDialog.setPositiveButton(R.string.ok_button,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface daialg, int which) {
                                     Intent intent = new Intent(getActivity(), MainActivity.class);

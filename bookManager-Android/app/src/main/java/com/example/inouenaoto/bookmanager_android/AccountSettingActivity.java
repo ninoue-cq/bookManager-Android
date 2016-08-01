@@ -18,7 +18,7 @@ public class AccountSettingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setting);
-        setTitle("アカウント設定");
+        setTitle(R.string.account_setting_title);
     }
 
     @Override
@@ -55,8 +55,8 @@ public class AccountSettingActivity extends Activity {
 
         if (!passwordText.equals(confPassText)) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
-            alertDialog.setMessage("パスワードが一致しません");
-            alertDialog.setPositiveButton("OK",
+            alertDialog.setMessage(R.string.not_match_passwarad);
+            alertDialog.setPositiveButton(R.string.ok_button,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                         }
@@ -65,8 +65,8 @@ public class AccountSettingActivity extends Activity {
         }
         else if (mailText.length() == 0 || passwordText.length() == 0 || confPassText.length() == 0) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
-            alertDialog.setMessage("未入力項目があります");
-            alertDialog.setPositiveButton("OK",
+            alertDialog.setMessage(R.string.not_entered_message);
+            alertDialog.setPositiveButton(R.string.ok_button,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                         }
@@ -76,8 +76,8 @@ public class AccountSettingActivity extends Activity {
             new AccountRegister().execute(mailText, passwordText, confPassText);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
             new AlertDialog.Builder(AccountSettingActivity.this);
-            alertDialog.setMessage("登録が完了しました");
-            alertDialog.setPositiveButton("OK",
+            alertDialog.setMessage(R.string.registration_complete);
+            alertDialog.setPositiveButton(R.string.ok_button,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface daialg, int which) {
                             finish();}

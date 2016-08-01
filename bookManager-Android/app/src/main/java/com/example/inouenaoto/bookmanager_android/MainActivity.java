@@ -23,11 +23,11 @@ public class MainActivity extends Activity  {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         actionBar.addTab(actionBar.newTab()
-                .setText("書籍一覧")
+                .setText(R.string.book_list_title)
                 .setTabListener(new TabListener<BookListFragment>(
                         this, "tag1", BookListFragment.class)));
         actionBar.addTab(actionBar.newTab()
-                .setText("設定")
+                .setText(R.string.setting_title)
                 .setTabListener(new TabListener<SettingFragment>(
                         this, "tag2", SettingFragment.class)));
     }

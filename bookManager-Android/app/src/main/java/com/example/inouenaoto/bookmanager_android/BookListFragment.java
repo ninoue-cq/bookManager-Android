@@ -115,8 +115,7 @@ public class BookListFragment extends Fragment implements APIListener{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        getActivity().setTitle("書籍一覧");
-
+        getActivity().setTitle(R.string.book_list_title);
     }
 
     @Override
@@ -192,11 +191,10 @@ public class BookListFragment extends Fragment implements APIListener{
         }
         else{
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-            alertDialog.setMessage("これ以上はデータがありません");
-            alertDialog.setPositiveButton("確認",
+            alertDialog.setMessage(R.string.no_more_data);
+            alertDialog.setPositiveButton(R.string.confirm,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Log.d("alertDialog", "確認ボタンクリック");
                         }
                     });
             alertDialog.show();

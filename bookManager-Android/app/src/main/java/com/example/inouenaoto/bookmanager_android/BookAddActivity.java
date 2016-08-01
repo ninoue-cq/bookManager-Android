@@ -38,7 +38,7 @@ public class BookAddActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_add);
-        setTitle("書籍追加");
+        setTitle(R.string.book_add_title);
 
         //bookAddActivity = this;
 
@@ -132,8 +132,8 @@ public class BookAddActivity extends Activity {
 
         if (addBookTitle.length() == 0 || addBookPrice.length() == 0 || addBookDate.length() == 0) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(BookAddActivity.this);
-            alertDialog.setMessage("未入力項目があります");
-            alertDialog.setPositiveButton("再入力",
+            alertDialog.setMessage(R.string.not_entered_message);
+            alertDialog.setPositiveButton(R.string.confirm,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 

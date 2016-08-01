@@ -17,7 +17,7 @@ public class AccountLoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_login);
-        setTitle("書籍追加");
+        setTitle(R.string.account_login_title);
 
         Button loginButton = (Button)findViewById(R.id.login_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -25,8 +25,6 @@ public class AccountLoginActivity extends Activity {
                 logintButtonTapped();
             }
         });
-
-
     }
 
     public void logintButtonTapped() {
@@ -38,11 +36,10 @@ public class AccountLoginActivity extends Activity {
 
         if (mailAddress.length() == 0 || password.length() == 0) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountLoginActivity.this);
-            alertDialog.setMessage("未入力項目があります");
-            alertDialog.setPositiveButton("確認",
+            alertDialog.setMessage(R.string.not_entered_message);
+            alertDialog.setPositiveButton(R.string.confirm,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Log.d("alertDialog", "確認ボタンクリック");
                         }
                     });
             alertDialog.show();
@@ -50,8 +47,8 @@ public class AccountLoginActivity extends Activity {
             new Login(AccountLoginActivity.this).execute(mailAddress, password);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountLoginActivity.this);
             new AlertDialog.Builder(AccountLoginActivity.this);
-            alertDialog.setMessage("ログイン完了");
-            alertDialog.setPositiveButton("OK",
+            alertDialog.setMessage(R.string.logint_complete);
+            alertDialog.setPositiveButton(R.string.ok_button,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface daialg, int which) {
                             Intent intent = new Intent();
