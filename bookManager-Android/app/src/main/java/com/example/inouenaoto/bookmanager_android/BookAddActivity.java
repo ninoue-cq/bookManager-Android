@@ -36,7 +36,7 @@ public class BookAddActivity extends Activity  {
         setContentView(R.layout.activity_book_add);
         setTitle("書籍追加");
 
-        EditText mSetDateText = (EditText) findViewById(R.id.add_book_date);
+        mSetDateText = (EditText) findViewById(R.id.add_book_date);
         mSetDateText.setOnClickListener(new SetDateTextAction());
 
         //画像添付ボタンの処理

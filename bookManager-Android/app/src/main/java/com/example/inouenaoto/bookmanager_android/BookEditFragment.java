@@ -1,32 +1,20 @@
 package com.example.inouenaoto.bookmanager_android;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.preference.EditTextPreference;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
-import android.widget.Toast;
-
 import java.io.InputStream;
 
 
@@ -37,7 +25,6 @@ public class BookEditFragment extends Fragment {
     private static final int mREQUEST_GALLERY = 0;
     private ImageView mBookImageView;
 
-
     public EditText mSetDateText;
 
     @Override
@@ -45,8 +32,6 @@ public class BookEditFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
 
         mSetDateText = (EditText) view.findViewById(R.id.edit_book_date);
-
-//      editDate.setOnClickListener(new SetDateTextAction());
 
         mSetDateText.setOnClickListener(new SetDateTextAction());
 
@@ -57,11 +42,11 @@ public class BookEditFragment extends Fragment {
 
         EditText editTitle = (EditText) view.findViewById(R.id.edit_book_title);
         EditText editPrice = (EditText) view.findViewById(R.id.edit_book_price);
-        EditText editDate = (EditText) view.findViewById(R.id.edit_book_date);
+        mSetDateText = (EditText) view.findViewById(R.id.edit_book_date);
 
         editTitle.setText(title);
         editPrice.setText(price);
-        editDate.setText(date);
+        mSetDateText.setText(date);
 
         mBookImageView=(ImageView) view.findViewById(R.id.book_image);
 
