@@ -41,29 +41,31 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 
-public class BookListFragment extends Fragment implements APIListener{
+public class BookListFragment extends Fragment implements APIListener {
 
     private ListView mListView;
     private int micons = R.mipmap.ic_launcher;
 
     private ArrayList<CustomData> mObjects;
 
+    private int mReadCount = 1;//読み込み回数のカウント
     public static int mDisplayCount = 0;//表示件数
 
     private JSONArray mJsonArray;
 
-    public BookListFragment() {}
+    public BookListFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view= inflater.inflate(R.layout.fragment_book_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_book_list, container, false);
         mListView = (ListView) view.findViewById(R.id.my_book_listView);
 
-        View myFooter = getActivity().getLayoutInflater().inflate(R.layout.list_footer,null,false);
+        View myFooter = getActivity().getLayoutInflater().inflate(R.layout.list_footer, null, false);
         mListView.addFooterView(myFooter);
-        mObjects=new ArrayList<>();
+        mObjects = new ArrayList<>();
 
         final BookListFragment thisFragment = this;
 
@@ -73,7 +75,7 @@ public class BookListFragment extends Fragment implements APIListener{
         bookListGet.execute();
 
         // フッターが押された時の処理
-        Button footerButton = (Button)myFooter.findViewById(R.id.read_more_button);
+        Button footerButton = (Button) myFooter.findViewById(R.id.read_more_button);
         footerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -83,33 +85,35 @@ public class BookListFragment extends Fragment implements APIListener{
                 BookListGet bookListGet = new BookListGet();
                 bookListGet.setAPIListener(thisFragment);
                 bookListGet.execute();
+                Log.d("displaycount", Integer.toString(mDisplayCount));
             }
         });
 
         // セルのクリックで編集フラグメントへデータを送る
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-               FragmentManager fragmentManager = getFragmentManager();
-               FragmentTransaction transaction = fragmentManager.beginTransaction();
-               Fragment bookEditFragment = new BookEditFragment();
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                Fragment bookEditFragment = new BookEditFragment();
 
-               ListView listView = (ListView) parent;
-               CustomData customData = (CustomData) listView.getItemAtPosition(position);
+                ListView listView = (ListView) parent;
+                CustomData customData = (CustomData) listView.getItemAtPosition(position);
 
-               Bundle bundle = new Bundle();
-               bundle.putString("titleText", customData.getTitle());
-               bundle.putString("priceText", customData.getPrice());
-               bundle.putString("dateText", customData.getDate());
-               bundle.putString("bookId", customData.getId());
-               bundle.putInt("image", micons);
+                Bundle bundle = new Bundle();
+                bundle.putString("titleText", customData.getTitle());
+                bundle.putString("priceText", customData.getPrice());
+                bundle.putString("dateText", customData.getDate());
+                bundle.putString("bookId", customData.getId());
+                bundle.putInt("image", micons);
 
-               bookEditFragment.setArguments(bundle);
-               transaction.replace(R.id.container, bookEditFragment).commit();
-           }
+                bookEditFragment.setArguments(bundle);
+                transaction.replace(R.id.container, bookEditFragment).commit();
+            }
         });
         return view;
     }
+
     //アクションバーの設定
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -123,9 +127,10 @@ public class BookListFragment extends Fragment implements APIListener{
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.list_menu, menu);
     }
+
     //アクションバーのボタンイベントのハンドリング
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.to_add_button:
                 Intent intent = new Intent();
@@ -144,20 +149,20 @@ public class BookListFragment extends Fragment implements APIListener{
             JSONObject jsonObject = new JSONObject(String.valueOf(result));
             mJsonArray = jsonObject.getJSONArray("result");
 
-            Log.d("jsonlength",Integer.toString(mJsonArray.length()));
-         //   for (int i = 0; i < mJsonArray.length(); i++) {
+            Log.d("jsonlength", Integer.toString(mJsonArray.length()));
+            //   for (int i = 0; i < mJsonArray.length(); i++) {
             for (int i = 0 + mDisplayCount; i < mDisplayCount + 5; i++) {
                 jsonObject = mJsonArray.getJSONObject(i);
                 CustomData item = new CustomData();
 
                 //購入日の書式変更
                 SimpleDateFormat beforeDate = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss ZZZZ");
-                SimpleDateFormat afterDate =  new SimpleDateFormat("yyyy/MM/dd");
+                SimpleDateFormat afterDate = new SimpleDateFormat("yyyy/MM/dd");
 
                 String title = jsonObject.getString("name");
                 String price = jsonObject.getString("price");
-                String id =jsonObject.getString("id");
-                Date  date = beforeDate.parse(jsonObject.getString("purchase_date"));
+                String id = jsonObject.getString("id");
+                Date date = beforeDate.parse(jsonObject.getString("purchase_date"));
 
                 String formatedDate = "";
                 formatedDate = afterDate.format(date);
@@ -176,23 +181,21 @@ public class BookListFragment extends Fragment implements APIListener{
             e.printStackTrace();
         }
 
-        ListAdapter customAdapter = new ListAdapter(getActivity(),0,mObjects);
+        ListAdapter customAdapter = new ListAdapter(getActivity(), 0, mObjects);
         mListView.setAdapter(customAdapter);
     }
 
     //さらに読みこむボタンが押された時の判定
-    public void readCountJudge(){
-        if(mJsonArray.length() >= mDisplayCount){
+    public void readCountJudge() {
+        if (mJsonArray.length() >= mReadCount * 5) {
+            mReadCount += 1;
             mDisplayCount += 5;
-        }
-        //残りのデータ件数が1以上5未満だった場合リストの全てを表示
-        else if(mJsonArray.length()>=mDisplayCount && mJsonArray.length() <= mDisplayCount+5){
+        } else if (mJsonArray.length() >= mReadCount * 5 && mJsonArray.length() <= (mReadCount + 1) * 5) {
             mDisplayCount = mJsonArray.length();
-        }
-        else{
+        } else {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-            alertDialog.setMessage(R.string.no_more_data);
-            alertDialog.setPositiveButton(R.string.confirm,
+            alertDialog.setMessage("これ以上はデータがありません");
+            alertDialog.setPositiveButton("確認",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                         }
