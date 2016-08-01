@@ -36,51 +36,56 @@ public class AccountSettingActivity extends Activity {
                 break;
             case R.id.save_button:
                 //アカウントの登録処理 長いからメソッドにしたほうがいいかもしれない
-                EditText mail = (EditText) findViewById(R.id.mail_adress);
-                final String mailText = mail.getText().toString();
-
-                EditText password = (EditText) findViewById(R.id.password);
-                final String passwordText = password.getText().toString();
-
-                EditText confirm = (EditText) findViewById(R.id.pass_conf);
-                final String confPassText = confirm.getText().toString();
-
-
-                if (!passwordText.equals(confPassText)) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
-                    alertDialog.setMessage("パスワードが一致しません");
-                    alertDialog.setPositiveButton("OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                }
-                            });
-                    alertDialog.show();
-                }
-                else if (mailText.length() == 0 || passwordText.length() == 0 || confPassText.length() == 0) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
-                    alertDialog.setMessage("未入力項目があります");
-                    alertDialog.setPositiveButton("OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                }
-                            });
-                    alertDialog.show();
-                } else {
-                    new AccountRegister().execute(mailText, passwordText, confPassText);
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
-                    new AlertDialog.Builder(AccountSettingActivity.this);
-                    alertDialog.setMessage("登録が完了しました");
-                    alertDialog.setPositiveButton("OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface daialg, int which) {
-                                    finish();}
-                            });
-                    alertDialog.show();
-
-                }
+                accountRegister();
                 break;
         }
         return true;
     }
+
+    public void accountRegister(){
+        EditText mail = (EditText) findViewById(R.id.mail_adress);
+        final String mailText = mail.getText().toString();
+
+        EditText password = (EditText) findViewById(R.id.password);
+        final String passwordText = password.getText().toString();
+
+        EditText confirm = (EditText) findViewById(R.id.pass_conf);
+        final String confPassText = confirm.getText().toString();
+
+
+        if (!passwordText.equals(confPassText)) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
+            alertDialog.setMessage("パスワードが一致しません");
+            alertDialog.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            alertDialog.show();
+        }
+        else if (mailText.length() == 0 || passwordText.length() == 0 || confPassText.length() == 0) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
+            alertDialog.setMessage("未入力項目があります");
+            alertDialog.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            alertDialog.show();
+        } else {
+            new AccountRegister().execute(mailText, passwordText, confPassText);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
+            new AlertDialog.Builder(AccountSettingActivity.this);
+            alertDialog.setMessage("登録が完了しました");
+            alertDialog.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface daialg, int which) {
+                            finish();}
+                    });
+            alertDialog.show();
+
+        }
+    }
+
 }
 

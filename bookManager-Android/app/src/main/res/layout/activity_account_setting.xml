@@ -41,7 +41,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="書籍名を入力してください"
+                android:hint="メールアドレスを入力してください"
                 android:id="@+id/mail_adress"
                 android:layout_below="@+id/text_adress"
                 android:layout_marginTop="10dp" />

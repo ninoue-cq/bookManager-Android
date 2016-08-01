@@ -95,32 +95,9 @@ public class BookAddActivity extends Activity {
                 finish();
                 break;
             case R.id.save_button:
-                //書籍追加の処理 長いのでメソッドにしたほうがいいのかもしれない
-
-                EditText bookTitle = (EditText) findViewById(R.id.add_book_title);
-                final String addBookTitle = bookTitle.getText().toString();
-
-                EditText bookPrice = (EditText) findViewById(R.id.add_book_price);
-                final String addBookPrice = bookPrice.getText().toString();
-                EditText bookDate = (EditText) findViewById(R.id.add_book_date);
-                final String addBookDate = bookDate.getText().toString();
-
-                if (addBookTitle.length() == 0 || addBookPrice.length() == 0 || addBookDate.length() == 0) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(BookAddActivity.this);
-                    alertDialog.setMessage("未入力項目があります");
-                    alertDialog.setPositiveButton("再入力",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            });
-                    alertDialog.show();
-                } else {
-                    new BookDataAdd().execute(addBookTitle, addBookPrice, addBookDate);
-                    Intent intent = new Intent(BookAddActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    break;
-                }
+                //書籍追加の処理
+                addBook();
+                break;
         }
         return true;
     }
@@ -140,6 +117,33 @@ public class BookAddActivity extends Activity {
             } catch (Exception e) {
 
             }
+        }
+    }
+
+    public void addBook(){
+        //書籍追加の処理
+        EditText bookTitle = (EditText) findViewById(R.id.add_book_title);
+        final String addBookTitle = bookTitle.getText().toString();
+
+        EditText bookPrice = (EditText) findViewById(R.id.add_book_price);
+        final String addBookPrice = bookPrice.getText().toString();
+        EditText bookDate = (EditText) findViewById(R.id.add_book_date);
+        final String addBookDate = bookDate.getText().toString();
+
+        if (addBookTitle.length() == 0 || addBookPrice.length() == 0 || addBookDate.length() == 0) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(BookAddActivity.this);
+            alertDialog.setMessage("未入力項目があります");
+            alertDialog.setPositiveButton("再入力",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+            alertDialog.show();
+        } else {
+            new BookDataAdd().execute(addBookTitle, addBookPrice, addBookDate);
+            Intent intent = new Intent(BookAddActivity.this, MainActivity.class);
+            startActivity(intent);
         }
     }
 

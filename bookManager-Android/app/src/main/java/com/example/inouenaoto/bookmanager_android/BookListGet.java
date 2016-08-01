@@ -24,6 +24,9 @@ public class BookListGet extends AsyncTask<Void, Void, StringBuffer> {
         this.mAPIListener = apiListener;
     }
 
+//    BookListFragment bookListFragment = new BookListFragment();
+//    private int listCount = bookListFragment.mDisplayCount;
+
     @Override
     protected StringBuffer doInBackground(Void... voids) {
         HttpURLConnection connection = null;
@@ -34,7 +37,6 @@ public class BookListGet extends AsyncTask<Void, Void, StringBuffer> {
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(1000);
             connection.setDoOutput(true);
-
             String postData = "page=1-100";
             OutputStream outputStream = connection.getOutputStream();
             outputStream.write(postData.getBytes());

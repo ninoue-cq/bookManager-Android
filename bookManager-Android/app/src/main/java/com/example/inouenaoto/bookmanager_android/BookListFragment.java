@@ -47,10 +47,8 @@ public class BookListFragment extends Fragment implements APIListener{
     private int micons = R.mipmap.ic_launcher;
 
     private ArrayList<CustomData> mObjects;
-    private int mTotal = 0;
 
-    private int mReadCount = 1;//読み込み回数のカウント
-    private int mDisplayCount = 0;//表示件数
+    public static int mDisplayCount = 0;//表示件数
 
     private JSONArray mJsonArray;
 
@@ -60,8 +58,8 @@ public class BookListFragment extends Fragment implements APIListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v= inflater.inflate(R.layout.fragment_book_list, container, false);
-        mListView = (ListView) v.findViewById(R.id.my_book_listView);
+        View view= inflater.inflate(R.layout.fragment_book_list, container, false);
+        mListView = (ListView) view.findViewById(R.id.my_book_listView);
 
         View myFooter = getActivity().getLayoutInflater().inflate(R.layout.list_footer,null,false);
         mListView.addFooterView(myFooter);
@@ -74,16 +72,13 @@ public class BookListFragment extends Fragment implements APIListener{
         bookListGet.setAPIListener(this);
         bookListGet.execute();
 
-        // フッターのボタンを取り出す
+        // フッターが押された時の処理
         Button footerButton = (Button)myFooter.findViewById(R.id.read_more_button);
         footerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Log.d("mReadCount * 1=",Integer.toString(mReadCount * 1));
-                Log.d("読み込み回数",Integer.toString(mReadCount));
                 //書籍一覧のデータの取得
-                Log.d("表示件数",Integer.toString(mDisplayCount));
                 readCountJudge();
                 BookListGet bookListGet = new BookListGet();
                 bookListGet.setAPIListener(thisFragment);
@@ -113,7 +108,7 @@ public class BookListFragment extends Fragment implements APIListener{
                transaction.replace(R.id.container, bookEditFragment).commit();
            }
         });
-        return v;
+        return view;
     }
     //アクションバーの設定
     @Override
@@ -150,7 +145,8 @@ public class BookListFragment extends Fragment implements APIListener{
             JSONObject jsonObject = new JSONObject(String.valueOf(result));
             mJsonArray = jsonObject.getJSONArray("result");
 
-          //  for (int i = 0; i < jsonArray.length(); i++) {
+            Log.d("jsonlength",Integer.toString(mJsonArray.length()));
+         //   for (int i = 0; i < mJsonArray.length(); i++) {
             for (int i = 0 + mDisplayCount; i < mDisplayCount + 5; i++) {
                 jsonObject = mJsonArray.getJSONObject(i);
                 CustomData item = new CustomData();
@@ -183,16 +179,15 @@ public class BookListFragment extends Fragment implements APIListener{
 
         ListAdapter customAdapter = new ListAdapter(getActivity(),0,mObjects);
         mListView.setAdapter(customAdapter);
-        mTotal=mObjects.size();
     }
 
     //さらに読みこむボタンが押された時の判定
     public void readCountJudge(){
-        if(mJsonArray.length() >= mReadCount * 5){
-            mReadCount += 1;
+        if(mJsonArray.length() >= mDisplayCount){
             mDisplayCount += 5;
         }
-        else if(mJsonArray.length()>=mReadCount*5 && mJsonArray.length() <= (mReadCount+1)*5){
+        //残りのデータ件数が1以上5未満だった場合リストの全てを表示
+        else if(mJsonArray.length()>=mDisplayCount && mJsonArray.length() <= mDisplayCount+5){
             mDisplayCount = mJsonArray.length();
         }
         else{
