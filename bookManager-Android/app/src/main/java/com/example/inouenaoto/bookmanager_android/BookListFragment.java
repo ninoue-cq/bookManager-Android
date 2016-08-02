@@ -101,7 +101,7 @@ public class BookListFragment extends Fragment  {
                bundle.putString("priceText",customData.getPrice());
                bundle.putString("dateText",customData.getDate());
                int selectedImage = icons[position];
-            //   bundle.putExtra("image",selectedImage);
+
                //値を書き込む
                bookEditFragment.setArguments(bundle);
                transaction.replace(R.id.container, bookEditFragment).commit();

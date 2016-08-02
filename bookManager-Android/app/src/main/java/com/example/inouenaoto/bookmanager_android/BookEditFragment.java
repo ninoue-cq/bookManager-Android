@@ -26,19 +26,26 @@ public class BookEditFragment extends Fragment {
     private ImageView mBookImageView;
 
     public EditText mSetDateText;
+    SetDateTextAction setDateTextAction = new SetDateTextAction();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
 
         mSetDateText = (EditText) view.findViewById(R.id.edit_book_date);
-
-        mSetDateText.setOnClickListener(new SetDateTextAction());
+        mSetDateText.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(final View v) {
+                setDateTextAction.pickerAppear(getActivity(),mSetDateText);
+            }
+        });
 
         //一覧画面から受け取った値をそれぞれのエデットテキストに反映
-        String title = getArguments().getString("titleText");
-        String price = getArguments().getString("priceText");
-        String date = getArguments().getString("dateText");
+        Bundle bundle = getArguments();
+
+        String title = bundle.getString("titleText");
+        String price = bundle.getString("priceText");
+        String date = bundle.getString("dateText");
 
         EditText editTitle = (EditText) view.findViewById(R.id.edit_book_title);
         EditText editPrice = (EditText) view.findViewById(R.id.edit_book_price);
@@ -63,15 +70,6 @@ public class BookEditFragment extends Fragment {
         return view;
     }
 
-
-    PicckerSetting picckerSetting = new PicckerSetting();
-    public class SetDateTextAction implements View.OnClickListener {
-        @Override
-        public void onClick(final View v) {
-            picckerSetting.pickerAppear(getActivity(),mSetDateText);
-        }
-    }
-
     //アクションバーの設定
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -90,7 +88,6 @@ public class BookEditFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
-
             case R.id.close_button:
                // Toast.makeText(getActivity(), R.string.add, Toast.LENGTH_SHORT).show();
                 BookListFragment bookListFragment = new BookListFragment();

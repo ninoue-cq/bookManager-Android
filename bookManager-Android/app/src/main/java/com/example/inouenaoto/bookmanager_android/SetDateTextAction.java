@@ -12,13 +12,10 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-/**
- * Created by inouenaoto on 2016/08/01.
- */
 //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
-public class PicckerSetting {
 
-    public void pickerAppear(Activity activity,final EditText editText) {
+public class SetDateTextAction {
+    public void pickerAppear (Activity activity,final EditText editText){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         final DatePicker datePicker = new DatePicker(activity);
         builder.setView(datePicker);

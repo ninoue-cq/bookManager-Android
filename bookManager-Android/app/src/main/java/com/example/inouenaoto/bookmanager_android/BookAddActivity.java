@@ -29,6 +29,7 @@ public class BookAddActivity extends Activity  {
 
     private static final int mREQUEST_GALLERY = 0;
     public EditText mSetDateText;
+    SetDateTextAction setDateTextAction = new SetDateTextAction();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,12 @@ public class BookAddActivity extends Activity  {
         setTitle("書籍追加");
 
         mSetDateText = (EditText) findViewById(R.id.add_book_date);
-        mSetDateText.setOnClickListener(new SetDateTextAction());
+        mSetDateText.setOnClickListener (new View.OnClickListener(){
+            @Override
+            public void onClick(final View v) {
+                setDateTextAction.pickerAppear(BookAddActivity. this,mSetDateText);
+            }
+        });
 
         //画像添付ボタンの処理
         findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
@@ -49,14 +55,6 @@ public class BookAddActivity extends Activity  {
                 startActivityForResult(intent, mREQUEST_GALLERY);
             }
         });
-    }
-
-    PicckerSetting picckerSetting = new PicckerSetting();
-    public class SetDateTextAction implements View.OnClickListener {
-        @Override
-        public void onClick(final View v) {
-            picckerSetting.pickerAppear(BookAddActivity.this,mSetDateText);
-        }
     }
 
     @Override
@@ -87,10 +85,10 @@ public class BookAddActivity extends Activity  {
         if(requestCode == mREQUEST_GALLERY && resultCode == RESULT_OK) {
             try {
                 InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                Bitmap img = BitmapFactory.decodeStream(inputStream);
+                Bitmap bookImage = BitmapFactory.decodeStream(inputStream);
                 inputStream.close();
                 // 選択した画像を表示
-                bookImageView.setImageBitmap(img);
+                bookImageView.setImageBitmap(bookImage);
                 } catch (Exception e) {
             }
         }
