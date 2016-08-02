@@ -48,12 +48,11 @@ public class BookListFragment extends Fragment implements APIListener {
 
     private ArrayList<CustomData> mObjects;
 
-    private int mReadCount = 1;//読み込み回数のカウント用の変数
     public  int mDisplayCount = 0;//表示件数
     public int ONCE_READCOUNT=5;
 
     private JSONArray mJsonArray;
-
+    public String mPriceAndTax;//セルの 〜円＋税 の部分
     public BookListFragment() {
     }
 
@@ -69,6 +68,8 @@ public class BookListFragment extends Fragment implements APIListener {
         mObjects = new ArrayList<>();
 
         final BookListFragment thisFragment = this;
+        mPriceAndTax = getString(R.string.price_and_tax);
+        Log.d("tax",mPriceAndTax);
 
         //書籍一覧のデータの取得
         BookListGet bookListGet = new BookListGet();
@@ -166,7 +167,7 @@ public class BookListFragment extends Fragment implements APIListener {
 
                 item.setId(id);
                 item.setTitle(title);
-                item.setPrice(price);
+                item.setPrice(price + mPriceAndTax);
                 item.setDate(formatedDate);
                 item.setIcon(BitmapFactory.decodeResource(
                         getResources(),

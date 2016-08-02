@@ -61,7 +61,7 @@ public class AccountSettingActivity extends Activity {
 
         } else {
             new AccountRegister().execute(mailText, passwordText, confPassText);
-            showAlterDialog(R.string.logint_complete);
+            showAlterDialog(R.string.login_complete);
         }
     }
 

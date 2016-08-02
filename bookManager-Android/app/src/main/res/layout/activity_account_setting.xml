@@ -24,7 +24,7 @@
             android:gravity="center"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="80dp">
+            android:layout_marginTop="@dimen/relative_margin_top">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -39,13 +39,13 @@
                 android:layout_alignStart="@+id/mail_adress" />
 
             <EditText
-                android:layout_width="300dp"
+                android:layout_width="@dimen/edit_text_width"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="@string/input_mail_adress"
                 android:id="@+id/mail_adress"
                 android:layout_below="@+id/text_adress"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="@dimen/text_field_interval" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,16 +56,16 @@
                 android:layout_below="@+id/mail_adress"
                 android:layout_alignLeft="@+id/mail_adress"
                 android:layout_alignStart="@+id/mail_adress"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="@dimen/text_field_interval" />
 
             <EditText
-                android:layout_width="300dp"
+                android:layout_width="@dimen/edit_text_width"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="@string/input_password"
                 android:id="@+id/password"
                 android:layout_below="@+id/text_pass"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="@dimen/text_field_interval" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                 android:layout_below="@+id/password"
                 android:layout_alignLeft="@+id/password"
                 android:layout_alignStart="@+id/password"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="@dimen/text_field_interval" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
                 android:hint="@string/inout_confpass"
                 android:id="@+id/pass_conf"
                 android:layout_below="@+id/text_pass_conf"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="@dimen/text_field_interval" />
         </RelativeLayout>
     </RelativeLayout>
 </ScrollView>

@@ -13,14 +13,14 @@
     <string name="not_entered_message">未入力項目があります</string>
     <string name="confirm">確認</string>
     <string name="ok_button">OK!</string>
-    <string name="logint_complete">ログインが完了しました</string>
+    <string name="login_complete">ログインが完了しました</string>
 
     <string name="not_match_passwarad">パスワードが一致しません</string>
     <string name="registration_complete">登録が完了しました</string>
     <string name="edit_complete">編集が完了しました</string>
 
     <string name="no_more_data">これ以上はデータがありません</string>
-    <string name="price_and_tax">円税</string>
+    <string name="price_and_tax">円+税</string>
     <string name="day_select">日付選択</string>
     <string name="back">戻る</string>
 
@@ -47,4 +47,6 @@
     <string name="close">閉じる</string>
     <string name="save">保存</string>
     <string name="book_add">書籍追加</string>
+
+    <string name="scroll_weight">1</string>
 </resources>

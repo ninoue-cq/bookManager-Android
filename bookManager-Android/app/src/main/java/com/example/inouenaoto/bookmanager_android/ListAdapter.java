@@ -39,7 +39,7 @@ public class ListAdapter extends ArrayAdapter<CustomData> {
         ((TextView) convertView.findViewById(R.id.title))
                 .setText(item.getTitle());
         ((TextView) convertView.findViewById(R.id.price))
-                .setText(item.getPrice() + "円+税");//ここの文字はvaluesから持ってきてもvaluesの方はint型のため足し算ができない
+                .setText(item.getPrice());
         ((TextView) convertView.findViewById(R.id.date))
                 .setText(item.getDate());
         return convertView;

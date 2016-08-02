@@ -48,7 +48,7 @@ public class AccountLoginActivity extends Activity {
             new Login(AccountLoginActivity.this).execute(mailAddress, password);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountLoginActivity.this);
             new AlertDialog.Builder(AccountLoginActivity.this);
-            alertDialog.setMessage(R.string.logint_complete);
+            alertDialog.setMessage(R.string.login_complete);
             alertDialog.setPositiveButton(R.string.ok_button, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface daialg, int which) {
                     Intent intent = new Intent(AccountLoginActivity.this,MainActivity.class);
