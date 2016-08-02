@@ -40,7 +40,7 @@ public class BookEditFragment extends Fragment {
     private  EditText mEditBookDate;
 
 
-    private static final int mREQUEST_GALLERY = 0;
+    private static final int REQUEST_GALLERY = 0;
     private ImageView mBookImageView;
 
 
@@ -81,7 +81,7 @@ public class BookEditFragment extends Fragment {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, mREQUEST_GALLERY);
+                startActivityForResult(intent, REQUEST_GALLERY);
             }
         });
         return view;
@@ -134,7 +134,7 @@ public class BookEditFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //  super.onActivityResult(requestCode, resultCode, data);
         // TODO Auto-generated method stub
-        if(requestCode == mREQUEST_GALLERY && resultCode == Activity.RESULT_OK) {
+        if(requestCode == REQUEST_GALLERY && resultCode == Activity.RESULT_OK) {
             try {
                 InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
                 Bitmap img = BitmapFactory.decodeStream(inputStream);

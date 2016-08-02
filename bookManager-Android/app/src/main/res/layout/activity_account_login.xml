@@ -9,7 +9,8 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -19,7 +20,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="@dimen/setting_height"
             android:gravity="center"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -32,13 +33,13 @@
                 android:id="@+id/text_adress"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size"
                 android:layout_alignParentTop="true"
                 android:layout_alignLeft="@+id/mail_adress"
                 android:layout_alignStart="@+id/mail_adress" />
 
             <EditText
-                android:layout_width="300dp"
+                android:layout_width="@dimen/setting_height"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="@string/input_mail_adress"
@@ -52,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/password"
                 android:id="@+id/text_pass"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size"
                 android:layout_below="@+id/mail_adress"
                 android:layout_alignLeft="@+id/mail_adress"
                 android:layout_alignStart="@+id/mail_adress"
@@ -62,7 +63,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="@string/input_mail_adress"
+                android:hint="@string/input_password"
                 android:id="@+id/password"
                 android:layout_below="@+id/text_pass"
                 android:layout_marginTop="10dp" />

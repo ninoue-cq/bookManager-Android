@@ -49,7 +49,8 @@ public class BookListFragment extends Fragment implements APIListener {
     private ArrayList<CustomData> mObjects;
 
     private int mReadCount = 1;//読み込み回数のカウント用の変数
-    public static int mDisplayCount = 0;//表示件数
+    public  int mDisplayCount = 0;//表示件数
+    public int ONCE_READCOUNT=5;
 
     private JSONArray mJsonArray;
 
@@ -148,7 +149,7 @@ public class BookListFragment extends Fragment implements APIListener {
 
             Log.d("jsonlength", Integer.toString(mJsonArray.length()));
 
-            for (int i = mDisplayCount; i < mDisplayCount + 5; i++) {
+            for (int i = mDisplayCount; i < mDisplayCount + ONCE_READCOUNT; i++) {
                 jsonObject = mJsonArray.getJSONObject(i);
                 CustomData item = new CustomData();
 
@@ -183,10 +184,10 @@ public class BookListFragment extends Fragment implements APIListener {
 
     //さらに読みこむボタンが押された時の判定
     public void readCountJudge() {
-        if (mJsonArray.length() >= mReadCount * 5) {
-            mReadCount += 1;
+        if (mJsonArray.length() >= mDisplayCount + ONCE_READCOUNT ) {
             mDisplayCount += 5;
-        } else if (mJsonArray.length() >= mReadCount * 5 && mJsonArray.length() <= (mReadCount + 1) * 5) {
+        } else if (mJsonArray.length() > mDisplayCount
+                && mJsonArray.length() <= mDisplayCount + ONCE_READCOUNT) {
             mDisplayCount = mJsonArray.length();
         } else {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());

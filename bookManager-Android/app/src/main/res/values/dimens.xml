@@ -3,4 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="setting_height">300dp</dimen>
+
+    <dimen name="text_size">12dp</dimen>
+    <dimen name="cell_text">20dp</dimen>
 </resources>

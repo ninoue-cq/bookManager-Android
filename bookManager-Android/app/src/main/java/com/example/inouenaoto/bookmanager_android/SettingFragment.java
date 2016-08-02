@@ -12,7 +12,6 @@ import android.widget.Button;
 
 public class SettingFragment extends Fragment {
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
