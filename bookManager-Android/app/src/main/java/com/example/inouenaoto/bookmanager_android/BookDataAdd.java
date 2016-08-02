@@ -15,11 +15,6 @@ import java.net.URL;
  */
 public class BookDataAdd extends AsyncTask<String, Integer, String> {
     StringBuffer buffer;
-    private APIListener mAPIListener;
-
-    public String mTitle;
-    public String mPrice;
-    public String mDate;
 
     @Override
     protected String doInBackground(String... params) {

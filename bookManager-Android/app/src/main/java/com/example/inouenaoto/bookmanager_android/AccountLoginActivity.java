@@ -40,6 +40,7 @@ public class AccountLoginActivity extends Activity {
             alertDialog.setPositiveButton(R.string.confirm,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+                            //特に処理は行わないがこれがないとエラーが出てしまう
                         }
                     });
             alertDialog.show();
@@ -48,15 +49,12 @@ public class AccountLoginActivity extends Activity {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountLoginActivity.this);
             new AlertDialog.Builder(AccountLoginActivity.this);
             alertDialog.setMessage(R.string.logint_complete);
-            alertDialog.setPositiveButton(R.string.ok_button,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface daialg, int which) {
-                            Intent intent = new Intent();
-                            intent.setClassName("com.example.inouenaoto.bookmanager_android",
-                                    "com.example.inouenaoto.bookmanager_android.MainActivity");
-                            startActivity(intent);
-                        }
-                    });
+            alertDialog.setPositiveButton(R.string.ok_button, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface daialg, int which) {
+                    Intent intent = new Intent(AccountLoginActivity.this,MainActivity.class);
+                    startActivity(intent);
+                }
+            });
             alertDialog.show();
         }
     }

@@ -8,6 +8,7 @@ import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -35,7 +36,6 @@ public class AccountSettingActivity extends Activity {
                 finish();
                 break;
             case R.id.save_button:
-                //アカウントの登録処理 長いからメソッドにしたほうがいいかもしれない
                 accountRegister();
                 break;
         }
@@ -52,40 +52,29 @@ public class AccountSettingActivity extends Activity {
         EditText confirm = (EditText) findViewById(R.id.pass_conf);
         final String confPassText = confirm.getText().toString();
 
-
         if (!passwordText.equals(confPassText)) {
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
-            alertDialog.setMessage(R.string.not_match_passwarad);
-            alertDialog.setPositiveButton(R.string.ok_button,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-            alertDialog.show();
-        }
-        else if (mailText.length() == 0 || passwordText.length() == 0 || confPassText.length() == 0) {
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
-            alertDialog.setMessage(R.string.not_entered_message);
-            alertDialog.setPositiveButton(R.string.ok_button,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-            alertDialog.show();
+            showAlterDialog(R.string.not_match_passwarad);
+
+        } else if (mailText.length() == 0 || passwordText.length() == 0
+                || confPassText.length() == 0) {
+            showAlterDialog(R.string.not_entered_message);
+
         } else {
             new AccountRegister().execute(mailText, passwordText, confPassText);
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
-            new AlertDialog.Builder(AccountSettingActivity.this);
-            alertDialog.setMessage(R.string.registration_complete);
-            alertDialog.setPositiveButton(R.string.ok_button,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface daialg, int which) {
-                            finish();}
-                    });
-            alertDialog.show();
-
+            showAlterDialog(R.string.logint_complete);
         }
     }
 
+    public void showAlterDialog(int message){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(AccountSettingActivity.this);
+        new AlertDialog.Builder(AccountSettingActivity.this);
+        alertDialog.setMessage(message);
+        alertDialog.setPositiveButton(R.string.ok_button,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface daialg, int which) {
+                        finish();}
+                });
+        alertDialog.show();
+    }
 }
 

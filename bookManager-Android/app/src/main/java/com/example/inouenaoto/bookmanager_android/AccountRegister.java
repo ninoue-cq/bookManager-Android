@@ -10,10 +10,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by inouenaoto on 2016/07/28.
- */
-
 public class AccountRegister extends AsyncTask<String, Integer, String> {
     StringBuffer buffer;
 

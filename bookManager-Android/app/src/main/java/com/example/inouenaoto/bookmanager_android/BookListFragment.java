@@ -48,7 +48,7 @@ public class BookListFragment extends Fragment implements APIListener {
 
     private ArrayList<CustomData> mObjects;
 
-    private int mReadCount = 1;//読み込み回数のカウント
+    private int mReadCount = 1;//読み込み回数のカウント用の変数
     public static int mDisplayCount = 0;//表示件数
 
     private JSONArray mJsonArray;
@@ -77,7 +77,6 @@ public class BookListFragment extends Fragment implements APIListener {
         // フッターが押された時の処理
         Button footerButton = (Button) myFooter.findViewById(R.id.read_more_button);
         footerButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 //書籍一覧のデータの取得
@@ -133,9 +132,7 @@ public class BookListFragment extends Fragment implements APIListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.to_add_button:
-                Intent intent = new Intent();
-                intent.setClassName("com.example.inouenaoto.bookmanager_android",
-                        "com.example.inouenaoto.bookmanager_android.BookAddActivity");
+                Intent intent = new Intent(getActivity(),BookAddActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -150,8 +147,8 @@ public class BookListFragment extends Fragment implements APIListener {
             mJsonArray = jsonObject.getJSONArray("result");
 
             Log.d("jsonlength", Integer.toString(mJsonArray.length()));
-            //   for (int i = 0; i < mJsonArray.length(); i++) {
-            for (int i = 0 + mDisplayCount; i < mDisplayCount + 5; i++) {
+
+            for (int i = mDisplayCount; i < mDisplayCount + 5; i++) {
                 jsonObject = mJsonArray.getJSONObject(i);
                 CustomData item = new CustomData();
 
@@ -164,8 +161,7 @@ public class BookListFragment extends Fragment implements APIListener {
                 String id = jsonObject.getString("id");
                 Date date = beforeDate.parse(jsonObject.getString("purchase_date"));
 
-                String formatedDate = "";
-                formatedDate = afterDate.format(date);
+                String formatedDate = afterDate.format(date);
 
                 item.setId(id);
                 item.setTitle(title);
@@ -194,8 +190,8 @@ public class BookListFragment extends Fragment implements APIListener {
             mDisplayCount = mJsonArray.length();
         } else {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-            alertDialog.setMessage("これ以上はデータがありません");
-            alertDialog.setPositiveButton("確認",
+            alertDialog.setMessage(R.string.no_more_data);
+            alertDialog.setPositiveButton(R.string.confirm,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                         }
@@ -204,4 +200,3 @@ public class BookListFragment extends Fragment implements APIListener {
         }
     }
 }
-

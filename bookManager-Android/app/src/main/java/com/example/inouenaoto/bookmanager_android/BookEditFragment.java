@@ -46,10 +46,10 @@ public class BookEditFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.fragment_book_edit, container, false);
+        final View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
 
-        EditText setDateText = (EditText) v.findViewById(R.id.edit_book_date);
-        setDateText.setOnClickListener(new SetDateTextAction());
+        mEditBookDate = (EditText) view.findViewById(R.id.edit_book_date);
+        mEditBookDate.setOnClickListener(new SetDateTextAction());
 
         //一覧画面から受け取った値をそれぞれのエデットテキストに反映
         String title = getArguments().getString("titleText");
@@ -63,10 +63,10 @@ public class BookEditFragment extends Fragment {
                 getResources(),
                 image);
 
-        mEditBookTitle = (EditText) v.findViewById(R.id.edit_book_title);
-        mEditBookPrice = (EditText) v.findViewById(R.id.edit_book_price);
-        mEditBookDate= (EditText) v.findViewById(R.id.edit_book_date);
-        ImageView editImage = (ImageView)  v.findViewById(R.id.book_image);
+        mEditBookTitle = (EditText) view.findViewById(R.id.edit_book_title);
+        mEditBookPrice = (EditText) view.findViewById(R.id.edit_book_price);
+
+        ImageView editImage = (ImageView)  view.findViewById(R.id.book_image);
 
         mEditBookTitle.setText(title);
         mEditBookPrice.setText(price);
@@ -74,7 +74,7 @@ public class BookEditFragment extends Fragment {
         editImage.setImageBitmap(imaged);
 
         //画像添付ボタンの処理
-        v.findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mBookImageView=(ImageView) v.findViewById(R.id.book_image);
@@ -84,30 +84,14 @@ public class BookEditFragment extends Fragment {
                 startActivityForResult(intent, mREQUEST_GALLERY);
             }
         });
-        return v;
+        return view;
     }
 
-    //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
+    PickerSetting pickerSetting = new PickerSetting();
     public class SetDateTextAction implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            final DatePicker datePicker = new DatePicker(getActivity());
-            builder.setView(datePicker);
-            builder.setTitle("日付選択");
-            builder.setPositiveButton("決定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    EditText setDateText = (EditText) v.findViewById(R.id.edit_book_date);
-                    int year = datePicker.getYear();
-                    int month = datePicker.getMonth();
-                    int day = datePicker.getDayOfMonth();
-                    setDateText.setText(year + "/" + month + "/" + day);
-                }
-            });
-            builder.setNegativeButton("キャンセル", null);
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
+            pickerSetting.pickerAppear(getActivity(),mEditBookDate);
         }
     }
 
@@ -131,7 +115,6 @@ public class BookEditFragment extends Fragment {
         switch (item.getItemId()) {
 
             case R.id.close_button:
-               // Toast.makeText(getActivity(), R.string.add, Toast.LENGTH_SHORT).show();
                 BookListFragment bookListFragment = new BookListFragment();
                 FragmentManager manager = this.getFragmentManager();
                 manager.beginTransaction()
@@ -140,33 +123,8 @@ public class BookEditFragment extends Fragment {
                         .commit();
                 break;
             case R.id.save_button:
-                //編集データをサーバーに送る処理 長いのでメソッドにすべきかもしれない
-                final String titleText =mEditBookTitle.getText().toString();
-                final String priceText = mEditBookPrice.getText().toString();
-                final String dateText = mEditBookDate.getText().toString();
-
-                if (titleText.length() == 0 || priceText.length() == 0 || dateText.length() == 0) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-                    alertDialog.setMessage(R.string.not_entered_message);
-                    alertDialog.setPositiveButton(R.string.confirm,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                }
-                            });
-                    alertDialog.show();
-                } else {
-                    new BookDataEdit(getActivity()).execute(titleText, priceText, dateText,mBookId);
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-                    alertDialog.setMessage(R.string.edit_complete);
-                    alertDialog.setPositiveButton(R.string.ok_button,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface daialg, int which) {
-                                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            });
-                    alertDialog.show();
-                }
+                //編集データをサーバーに送る処理
+                saveAccount();
                 break;
         }
         return true;
@@ -186,6 +144,36 @@ public class BookEditFragment extends Fragment {
             } catch (Exception e) {
 
             }
+        }
+    }
+
+    public  void saveAccount(){
+        final String titleText =mEditBookTitle.getText().toString();
+        final String priceText = mEditBookPrice.getText().toString();
+        final String dateText = mEditBookDate.getText().toString();
+
+        if (titleText.length() == 0 || priceText.length() == 0 || dateText.length() == 0) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+            alertDialog.setMessage(R.string.not_entered_message);
+            alertDialog.setPositiveButton(R.string.confirm,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //特に処理は行わないがないとダイアログを閉じれない
+                        }
+                    });
+            alertDialog.show();
+        } else {
+            new BookDataEdit(getActivity()).execute(titleText, priceText, dateText,mBookId);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+            alertDialog.setMessage(R.string.edit_complete);
+            alertDialog.setPositiveButton(R.string.ok_button,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface daialg, int which) {
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+            alertDialog.show();
         }
     }
 }

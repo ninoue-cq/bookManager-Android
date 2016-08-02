@@ -32,7 +32,7 @@ public class BookAddActivity extends Activity {
     // 日付設定ダイアログのインスタンスを格納する変数
     private DatePickerDialog.OnDateSetListener DateSetListener;
     private static final int mREQUEST_GALLERY = 0;
-
+    public EditText mSetDateText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +40,8 @@ public class BookAddActivity extends Activity {
         setContentView(R.layout.activity_book_add);
         setTitle(R.string.book_add_title);
 
-        //bookAddActivity = this;
-
-        EditText setDateText = (EditText) findViewById(R.id.add_book_date);
-        setDateText.setOnClickListener(new SetDateTextAction());
+        mSetDateText = (EditText) findViewById(R.id.add_book_date);
+        mSetDateText.setOnClickListener(new SetDateTextAction());
 
         //画像添付ボタンの処理
         findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
@@ -58,26 +56,11 @@ public class BookAddActivity extends Activity {
     }
 
     //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
+    PickerSetting pickerSetting = new PickerSetting();
     public class SetDateTextAction implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(BookAddActivity.this);
-            final DatePicker datePicker = new DatePicker(BookAddActivity.this);
-            builder.setView(datePicker);
-            builder.setTitle("日付選択");
-            builder.setPositiveButton("決定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    EditText setDateText = (EditText) v.findViewById(R.id.add_book_date);
-                    int year = datePicker.getYear();
-                    int month = datePicker.getMonth();
-                    int day = datePicker.getDayOfMonth();
-                    setDateText.setText(year + "/" + month + "/" + day);
-                }
-            });
-            builder.setNegativeButton("キャンセル", null);
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
+            pickerSetting.pickerAppear(BookAddActivity.this,mSetDateText);
         }
     }
 

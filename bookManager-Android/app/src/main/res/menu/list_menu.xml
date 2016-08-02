@@ -6,6 +6,6 @@
     <item
         android:id="@+id/to_add_button"
         android:showAsAction="always"
-        android:title="書籍追加"
+        android:title="@string/book_add"
         tools:ignore="AppCompatResource" />
 </menu>

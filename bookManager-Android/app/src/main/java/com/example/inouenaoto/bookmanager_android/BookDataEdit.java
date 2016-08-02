@@ -58,7 +58,6 @@ public class BookDataEdit extends AsyncTask<String, Integer, String> {
         } finally {
             connection.disconnect();
         }
-
         return buffer.toString();
     }
 }

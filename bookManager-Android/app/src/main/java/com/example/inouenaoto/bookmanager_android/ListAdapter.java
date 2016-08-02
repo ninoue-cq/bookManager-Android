@@ -1,6 +1,7 @@
 package com.example.inouenaoto.bookmanager_android;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,9 +38,8 @@ public class ListAdapter extends ArrayAdapter<CustomData> {
                 .setImageBitmap(item.getIcon());
         ((TextView) convertView.findViewById(R.id.title))
                 .setText(item.getTitle());
-
         ((TextView) convertView.findViewById(R.id.price))
-                .setText(item.getPrice()+ "円+税");
+                .setText(item.getPrice() + "円+税");//ここの文字はvaluesから持ってきてもvaluesの方はint型のため足し算ができない
         ((TextView) convertView.findViewById(R.id.date))
                 .setText(item.getDate());
         return convertView;

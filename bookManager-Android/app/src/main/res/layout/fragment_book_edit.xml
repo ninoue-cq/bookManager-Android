@@ -28,7 +28,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="画像添付"
+            android:text="@string/image_send"
             android:id="@+id/send_button"
             android:layout_marginTop="48dp"
             android:layout_alignTop="@+id/book_image"
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="書籍名"
+                android:text="@string/book_title"
                 android:id="@+id/text_book"
                 android:textSize="12sp"
                 android:layout_alignParentTop="true"
@@ -62,7 +62,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="書籍名を入力してください"
+                android:hint="@string/input_book_title"
                 android:id="@+id/edit_book_title"
                 android:layout_below="@+id/text_book"
                 android:layout_marginTop="10dp" />
@@ -70,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="金額"
+                android:text="@string/book_price"
                 android:id="@+id/text_price"
                 android:textSize="12sp"
                 android:layout_below="@+id/edit_book_title"
@@ -82,7 +82,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="金額を入力してください"
+                android:hint="@string/input_book_price"
                 android:id="@+id/edit_book_price"
                 android:layout_below="@+id/text_price"
                 android:layout_marginTop="10dp" />
@@ -90,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="購入日"
+                android:text="@string/book_date"
                 android:id="@+id/text_date"
                 android:textSize="12sp"
                 android:layout_below="@+id/edit_book_price"
@@ -101,7 +101,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="日付を入力してください"
+                android:hint="@string/input_book_date"
                 android:id="@+id/edit_book_date"
                 android:layout_below="@+id/text_date"
                 android:layout_marginTop="10dp" />

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">bookManager-Android</string>
 
@@ -6,14 +7,44 @@
     <string name="book_add_title">書籍追加</string>
     <string name="book_edit_title">書籍編集</string>
     <string name="setting_title">設定</string>
+
     <string name="account_setting_title">アカウント設定</string>
     <string name="account_login_title">ログイン</string>
     <string name="not_entered_message">未入力項目があります</string>
     <string name="confirm">確認</string>
     <string name="ok_button">OK!</string>
     <string name="logint_complete">ログインが完了しました</string>
+
     <string name="not_match_passwarad">パスワードが一致しません</string>
     <string name="registration_complete">登録が完了しました</string>
     <string name="edit_complete">編集が完了しました</string>
+
     <string name="no_more_data">これ以上はデータがありません</string>
+    <string name="price_and_tax">円税</string>
+    <string name="day_select">日付選択</string>
+    <string name="back">戻る</string>
+
+    <string name="password">パスワード</string>
+    <string name="mail_adress">メールアドレス</string>
+    <string name="confpass">パスワード確認</string>
+    <string name="input_password">パスワードを入力してください</string>
+    <string name="input_mail_adress">メールアドレスを入力してください</string>
+    <string name="inout_confpass">もう一度パスワードを入力してください</string>
+
+    <string name="login">ログイン</string>
+    <string name="account_setting">アカウント設定</string>
+    <string name="image_send">画像添付</string>
+    <string name="read_more_button">さらに読みこむ</string>
+
+    <string name="book_title">書籍名</string>
+    <string name="book_price">金額</string>
+    <string name="book_date">購入日時</string>
+
+    <string name="input_book_title">書籍名を入力してください</string>
+    <string name="input_book_price">金額を入力してください</string>
+    <string name="input_book_date">購入日を入力してください</string>
+
+    <string name="close">閉じる</string>
+    <string name="save">保存</string>
+    <string name="book_add">書籍追加</string>
 </resources>
