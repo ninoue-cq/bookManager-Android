@@ -6,12 +6,12 @@
     <item
         android:id="@+id/close_button"
         android:showAsAction="always"
-        android:title="閉じる"
+        android:title="@string/close"
         tools:ignore="AppCompatResource" />
 
     <item
         android:id="@+id/save_button"
         android:showAsAction="always"
-        android:title="保存"
+        android:title="@string/save"
         tools:ignore="AppCompatResource" />
 </menu>

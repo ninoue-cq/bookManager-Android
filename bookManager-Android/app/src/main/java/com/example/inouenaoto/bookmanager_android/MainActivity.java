@@ -14,19 +14,17 @@ public class MainActivity extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final ActionBar actionBar = getActionBar();
-        setContentView(R.layout.activity_main);
-        //final ActionBar actionBar = getActionBar();
 
+        setContentView(R.layout.activity_main);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         actionBar.addTab(actionBar.newTab()
-                .setText("書籍一覧")
+                .setText(R.string.book_list_title)
                 .setTabListener(new TabListener<BookListFragment>(
-                        this, "tag1", BookListFragment.class)));
+                        this, "listTag", BookListFragment.class)));
         actionBar.addTab(actionBar.newTab()
-                .setText("設定")
+                .setText(R.string.setting_title)
                 .setTabListener(new TabListener<SettingFragment>(
-                        this, "tag2", SettingFragment.class)));
+                        this, "settingTag", SettingFragment.class)));
     }
 }
-

@@ -10,17 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SettingFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SettingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SettingFragment extends Fragment {
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +38,7 @@ public class SettingFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        getActivity().setTitle("設定");
+        getActivity().setTitle(R.string.setting_title);
     }
         // TODO: Rename method, update argument and hook method into UI event
 }

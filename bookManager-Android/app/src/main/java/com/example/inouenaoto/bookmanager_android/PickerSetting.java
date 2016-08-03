@@ -13,14 +13,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
-
-public class SetDateTextAction {
-    public void pickerAppear (Activity activity,final EditText editText){
+public class PickerSetting {
+    public void pickerAppear(Activity activity,final EditText editText) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         final DatePicker datePicker = new DatePicker(activity);
         builder.setView(datePicker);
-        builder.setTitle("日付選択");
-        builder.setPositiveButton("決定", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.day_select);
+        builder.setPositiveButton(R.string.ok_button, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int year = datePicker.getYear();
@@ -29,7 +28,7 @@ public class SetDateTextAction {
                 editText.setText(year + "/" + month + "/" + day);
             }
         });
-        builder.setNegativeButton("キャンセル", null);
+        builder.setNegativeButton(R.string.back, null);
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }

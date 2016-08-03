@@ -9,7 +9,8 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -19,72 +20,72 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="@dimen/setting_height"
             android:gravity="center"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="80dp">
+            android:layout_marginTop="@dimen/relative_margin_top">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="メールアドレス"
+                android:text="@string/mail_adress"
                 android:id="@+id/text_adress"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size"
                 android:layout_alignParentTop="true"
                 android:layout_alignLeft="@+id/mail_adress"
                 android:layout_alignStart="@+id/mail_adress" />
 
             <EditText
-                android:layout_width="300dp"
+                android:layout_width="@dimen/edit_text_width"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="書籍名を入力してください"
+                android:hint="@string/input_mail_adress"
                 android:id="@+id/mail_adress"
                 android:layout_below="@+id/text_adress"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="@dimen/text_field_interval" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="パスワード"
+                android:text="@string/password"
                 android:id="@+id/text_pass"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size"
                 android:layout_below="@+id/mail_adress"
                 android:layout_alignLeft="@+id/mail_adress"
                 android:layout_alignStart="@+id/mail_adress"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="@dimen/text_field_interval" />
 
             <EditText
-                android:layout_width="300dp"
+                android:layout_width="@dimen/edit_text_width"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="パスワードを入力してください"
-                android:id="@+id/pass_word"
+                android:hint="@string/input_password"
+                android:id="@+id/password"
                 android:layout_below="@+id/text_pass"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="@dimen/text_field_interval" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="パスワード確認"
+                android:text="@string/password"
                 android:id="@+id/text_pass_conf"
-                android:textSize="12sp"
-                android:layout_below="@+id/pass_word"
-                android:layout_alignLeft="@+id/pass_word"
-                android:layout_alignStart="@+id/pass_word"
-                android:layout_marginTop="10dp" />
+                android:textSize="@dimen/text_size"
+                android:layout_below="@+id/password"
+                android:layout_alignLeft="@+id/password"
+                android:layout_alignStart="@+id/password"
+                android:layout_marginTop="@dimen/text_field_interval" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="もう一度パスワードを入力してください"
+                android:hint="@string/inout_confpass"
                 android:id="@+id/pass_conf"
                 android:layout_below="@+id/text_pass_conf"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="@dimen/text_field_interval" />
         </RelativeLayout>
     </RelativeLayout>
 </ScrollView>

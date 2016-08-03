@@ -1,10 +1,6 @@
 package com.example.inouenaoto.bookmanager_android;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,28 +16,25 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TimePicker;
-import android.widget.Toast;
-
 import java.io.InputStream;
 
-public class BookAddActivity extends Activity  {
+public class BookAddActivity extends Activity {
 
-    private static final int mREQUEST_GALLERY = 0;
+    private static final int REQUEST_GALLERY = 0;
     public EditText mSetDateText;
-    SetDateTextAction setDateTextAction = new SetDateTextAction();
+    PickerSetting pickerSetting = new PickerSetting();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_add);
-        setTitle("書籍追加");
+        setTitle(R.string.book_add_title);
 
         mSetDateText = (EditText) findViewById(R.id.add_book_date);
         mSetDateText.setOnClickListener (new View.OnClickListener(){
             @Override
             public void onClick(final View v) {
-                setDateTextAction.pickerAppear(BookAddActivity. this,mSetDateText);
+                pickerSetting.pickerAppear(BookAddActivity. this,mSetDateText);
             }
         });
 
@@ -52,7 +45,7 @@ public class BookAddActivity extends Activity  {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, mREQUEST_GALLERY);
+                startActivityForResult(intent, REQUEST_GALLERY);
             }
         });
     }
@@ -66,12 +59,12 @@ public class BookAddActivity extends Activity  {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.close_button:
                 finish();
                 break;
             case R.id.save_button:
-                //書籍追加の処理をここに書く
+                //書籍追加の処理
+                addBook();
                 break;
         }
         return true;
@@ -79,20 +72,47 @@ public class BookAddActivity extends Activity  {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-      //  super.onActivityResult(requestCode, resultCode, data);
+        //  super.onActivityResult(requestCode, resultCode, data);
         // TODO Auto-generated method stub
         ImageView bookImageView = (ImageView) findViewById(R.id.book_image);
-        if(requestCode == mREQUEST_GALLERY && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
             try {
                 InputStream inputStream = getContentResolver().openInputStream(data.getData());
                 Bitmap bookImage = BitmapFactory.decodeStream(inputStream);
                 inputStream.close();
                 // 選択した画像を表示
                 bookImageView.setImageBitmap(bookImage);
-                } catch (Exception e) {
+            } catch (Exception e) {
+
             }
         }
     }
+
+    public void addBook(){
+        //書籍追加の処理
+        EditText bookTitle = (EditText) findViewById(R.id.add_book_title);
+        String addBookTitle = bookTitle.getText().toString();
+
+        EditText bookPrice = (EditText) findViewById(R.id.add_book_price);
+        String addBookPrice = bookPrice.getText().toString();
+
+        EditText bookDate = (EditText) findViewById(R.id.add_book_date);
+        String addBookDate = bookDate.getText().toString();
+
+        if (addBookTitle.length() == 0 || addBookPrice.length() == 0 || addBookDate.length() == 0) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(BookAddActivity.this);
+            alertDialog.setMessage(R.string.not_entered_message);
+            alertDialog.setPositiveButton(R.string.confirm,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            alertDialog.show();
+        } else {
+            new BookDataAdd().execute(addBookTitle, addBookPrice, addBookDate);
+            Intent intent = new Intent(BookAddActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
 }
-
-
