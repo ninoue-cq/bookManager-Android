@@ -33,8 +33,8 @@ public class BookDataEdit extends AsyncTask<String, Integer, String> {
             connection.setConnectTimeout(1000);
             connection.setDoOutput(true);
 
-            String postText = String.format("id=%s&image_url=x&name=%s&price=%s&purchase_date=%s", mBookId, mTitle, mPrice, mDate);
-            String postData = postText;
+            String postData = MyApplication.getContext().getResources()
+                    .getString(R.string.edit_post_data);
             OutputStream outputStream = connection.getOutputStream();
             outputStream.write(postData.getBytes());
             outputStream.flush();
@@ -48,7 +48,6 @@ public class BookDataEdit extends AsyncTask<String, Integer, String> {
             while ((temp = bufferedReader.readLine()) != null) {
                 buffer.append(temp);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

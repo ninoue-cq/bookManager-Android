@@ -1,7 +1,10 @@
 package com.example.inouenaoto.bookmanager_android;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,22 +14,21 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by inouenaoto on 2016/07/28.
- */
 public class Login extends AsyncTask<String, Integer, String> {
     StringBuffer buffer;
     Context context;
 
+    public String mMailAddress;
+    public String mPassword;
     public Login(Context context) {
         this.context = context;
     }
-
+    Context ctx;
     @Override
     protected String doInBackground(String... params) {
-        String mMailAddress = params[0];
-        String mPassword = params[1];
-
+        mMailAddress = params[0];
+        mPassword = params[1];
+        //String sample = String.getStrin():
         HttpURLConnection connection = null;
         try {
             URL url = new URL("http://app.com/account/login");
@@ -35,8 +37,9 @@ public class Login extends AsyncTask<String, Integer, String> {
             connection.setConnectTimeout(1000);
             connection.setDoOutput(true);
 
-            String postText = String.format("mail_address=%s&password=%s", mMailAddress, mPassword);
-            String postData = postText;
+            String postData = MyApplication.getContext()
+                    .getString(R.string.login_post_data,mMailAddress,mPassword);
+            Log.d("Login post;",postData);
             OutputStream outputStream = connection.getOutputStream();
             outputStream.write(postData.getBytes());
             outputStream.flush();
@@ -56,7 +59,6 @@ public class Login extends AsyncTask<String, Integer, String> {
         } finally {
             connection.disconnect();
         }
-
         return buffer.toString();
     }
 }

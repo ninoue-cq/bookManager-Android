@@ -31,7 +31,6 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
         } else if (mTag == "tag2") {
             mTabJudge = 2;
             switchFragment(mTabJudge);
-
         }
     }
 

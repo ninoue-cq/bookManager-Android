@@ -12,10 +12,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by inouenaoto on 2016/07/27.
- */
-
 public class BookListGet extends AsyncTask<Void, Void, StringBuffer> {
     StringBuffer buffer;
     private APIListener mAPIListener;

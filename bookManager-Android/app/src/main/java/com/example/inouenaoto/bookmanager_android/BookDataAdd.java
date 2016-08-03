@@ -29,10 +29,8 @@ public class BookDataAdd extends AsyncTask<String, Integer, String> {
             conn.setRequestMethod("POST");
             conn.setConnectTimeout(1000);
             conn.setDoOutput(true);
-
-            String postTexts = String.format("image_url=a&name=%s&price=%s&purchase_date=%s", mTitle, mPrice, mDate);
-
-            String postDatas = postTexts;
+            String postDatas = MyApplication.getContext().getResources()
+                    .getString(R.string.add_post_data);
             OutputStream outputStream = conn.getOutputStream();
             outputStream.write(postDatas.getBytes());
             outputStream.flush();

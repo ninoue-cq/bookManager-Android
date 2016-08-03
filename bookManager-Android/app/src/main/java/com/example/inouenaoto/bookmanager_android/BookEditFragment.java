@@ -54,14 +54,9 @@ public class BookEditFragment extends Fragment {
         String price = bundle.getString("priceText");
         String date = bundle.getString("dateText");
         int image = bundle.getInt("bookImage");
-        Log.d("image ",Integer.toString(image));
         Bitmap imaged = BitmapFactory.decodeResource(
                 getResources(),
                 image);
-
-        Log.d("image ",mBookId);
-        String string = "yeah";
-        Log.d("onCreateView:",string);
 
         mEditBookTitle = (EditText) view.findViewById(R.id.edit_book_title);
         mEditBookPrice = (EditText) view.findViewById(R.id.edit_book_price);

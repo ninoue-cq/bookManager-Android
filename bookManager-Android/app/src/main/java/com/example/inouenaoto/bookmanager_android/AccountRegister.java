@@ -26,8 +26,8 @@ public class AccountRegister extends AsyncTask<String, Integer, String> {
             conn.setConnectTimeout(1000);
             conn.setDoOutput(true);
 
-            String postText = String.format("mail_address=%s&password=%s", mailAddress, password);
-            String postData = postText;
+            String postData = MyApplication.getContext()
+                    .getString(R.string.register_post_data);
             OutputStream outputStream = conn.getOutputStream();
             outputStream.write(postData.getBytes());
             outputStream.flush();
