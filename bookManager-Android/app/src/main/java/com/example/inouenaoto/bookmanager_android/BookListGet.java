@@ -28,7 +28,8 @@ public class BookListGet extends AsyncTask<Void, Void, StringBuffer> {
         HttpURLConnection connection = null;
 
         try {
-            URL url = new URL("http://app.com/book/get");
+            URL url = new URL(MyApplication.getContext()
+                    .getResources().getString(R.string.book_list_url));
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(1000);

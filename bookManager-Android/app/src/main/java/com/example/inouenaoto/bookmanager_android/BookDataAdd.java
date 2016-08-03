@@ -24,13 +24,14 @@ public class BookDataAdd extends AsyncTask<String, Integer, String> {
 
         HttpURLConnection conn = null;
         try {
-            URL url = new URL("http://app.com/book/regist");
+            URL url = new URL(MyApplication.getContext().getResources()
+                    .getString(R.string.book_add_url));
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setConnectTimeout(1000);
             conn.setDoOutput(true);
             String postDatas = MyApplication.getContext().getResources()
-                    .getString(R.string.add_post_data);
+                    .getString(R.string.add_post_data,mTitle,mPrice,mDate);
             OutputStream outputStream = conn.getOutputStream();
             outputStream.write(postDatas.getBytes());
             outputStream.flush();

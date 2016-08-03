@@ -66,8 +66,6 @@ public class BookListFragment extends Fragment implements APIListener {
         mListView.addFooterView(myFooter);
         mObjects = new ArrayList<>();
 
-        final BookListFragment thisFragment = this;
-
         //書籍一覧のデータの取得
         BookListGet bookListGet = new BookListGet();
         bookListGet.setAPIListener(this);
@@ -81,7 +79,7 @@ public class BookListFragment extends Fragment implements APIListener {
                 //書籍一覧のデータの取得
                 readCountJudge();
                 BookListGet bookListGet = new BookListGet();
-                bookListGet.setAPIListener(thisFragment);
+                bookListGet.setAPIListener(BookListFragment.this);
                 bookListGet.execute();
                 Log.d("displaycount", Integer.toString(mDisplayCount));
             }
@@ -185,15 +183,18 @@ public class BookListFragment extends Fragment implements APIListener {
     public void readCountJudge() {
         if (mJsonArray.length() >= mDisplayCount + ONCE_READCOUNT ) {
             mDisplayCount += 5;
+            Log.d("display daijbu",Integer.toString(mDisplayCount));
         } else if (mJsonArray.length() > mDisplayCount
                 && mJsonArray.length() <= mDisplayCount + ONCE_READCOUNT) {
             mDisplayCount = mJsonArray.length();
+            Log.d("display maamaa",Integer.toString(mDisplayCount));
         } else {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
             alertDialog.setMessage(R.string.no_more_data);
             alertDialog.setPositiveButton(R.string.confirm,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+                            Log.d("display moune-yo!",Integer.toString(mDisplayCount));
                         }
                     });
             alertDialog.show();

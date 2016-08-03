@@ -16,18 +16,19 @@ public class AccountRegister extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... params) {
         String mailAddress = params[0];
-        String password = params[1];
+        String mPassword = params[1];
 
         HttpURLConnection conn = null;
         try {
-            URL url = new URL("http://app.com/account/register");
+            URL url = new URL(MyApplication.getContext().getResources()
+                    .getString(R.string.account_register_url));
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setConnectTimeout(1000);
             conn.setDoOutput(true);
 
             String postData = MyApplication.getContext()
-                    .getString(R.string.register_post_data);
+                    .getString(R.string.register_post_data,mailAddress,mPassword);
             OutputStream outputStream = conn.getOutputStream();
             outputStream.write(postData.getBytes());
             outputStream.flush();

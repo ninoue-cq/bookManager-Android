@@ -15,6 +15,9 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
     private final String mTag;
     private int mTabJudge;
 
+    private int LIST_TAG_NUMBER = 1;
+    private int SETTING_TAG_NUMBER = 2;
+
     //コンストラクタ
     public TabListener(Activity activity, String tag, Class<T> clz) {
         mActivity = activity;
@@ -25,11 +28,11 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
     //タブが選択されたとき
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 
-        if (mTag == "tag1") {
-            mTabJudge = 1;
+        if (mTag == "listTag") {
+            mTabJudge = LIST_TAG_NUMBER;
             switchFragment(mTabJudge);
-        } else if (mTag == "tag2") {
-            mTabJudge = 2;
+        } else if (mTag == "settingTag") {
+            mTabJudge = SETTING_TAG_NUMBER;
             switchFragment(mTabJudge);
         }
     }

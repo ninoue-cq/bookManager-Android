@@ -21,10 +21,10 @@ public class MainActivity extends Activity  {
         actionBar.addTab(actionBar.newTab()
                 .setText(R.string.book_list_title)
                 .setTabListener(new TabListener<BookListFragment>(
-                        this, "tag1", BookListFragment.class)));
+                        this, "listTag", BookListFragment.class)));
         actionBar.addTab(actionBar.newTab()
                 .setText(R.string.setting_title)
                 .setTabListener(new TabListener<SettingFragment>(
-                        this, "tag2", SettingFragment.class)));
+                        this, "settingTag", SettingFragment.class)));
     }
 }

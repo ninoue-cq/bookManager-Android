@@ -31,15 +31,17 @@ public class Login extends AsyncTask<String, Integer, String> {
         //String sample = String.getStrin():
         HttpURLConnection connection = null;
         try {
-            URL url = new URL("http://app.com/account/login");
+            //URL url = new URL("http://app.com/account/login");
+            URL url = new URL(MyApplication.getContext().getResources().
+                    getString(R.string.account_login_url));
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setConnectTimeout(1000);
             connection.setDoOutput(true);
 
             String postData = MyApplication.getContext()
-                    .getString(R.string.login_post_data,mMailAddress,mPassword);
-            Log.d("Login post;",postData);
+                    .getString(R.string.login_post_data, mMailAddress, mPassword);
+            Log.d("Login post;", postData);
             OutputStream outputStream = connection.getOutputStream();
             outputStream.write(postData.getBytes());
             outputStream.flush();

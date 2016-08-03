@@ -27,14 +27,15 @@ public class BookDataEdit extends AsyncTask<String, Integer, String> {
 
         HttpURLConnection connection = null;
         try {
-            URL url = new URL("http://app.com/book/update");
+            URL url = new URL(MyApplication.getContext().getResources()
+                    .getString(R.string.book_edit_url));
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setConnectTimeout(1000);
             connection.setDoOutput(true);
 
             String postData = MyApplication.getContext().getResources()
-                    .getString(R.string.edit_post_data);
+                    .getString(R.string.edit_post_data, mBookId, mTitle, mPrice, mDate);
             OutputStream outputStream = connection.getOutputStream();
             outputStream.write(postData.getBytes());
             outputStream.flush();
@@ -48,6 +49,7 @@ public class BookDataEdit extends AsyncTask<String, Integer, String> {
             while ((temp = bufferedReader.readLine()) != null) {
                 buffer.append(temp);
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
