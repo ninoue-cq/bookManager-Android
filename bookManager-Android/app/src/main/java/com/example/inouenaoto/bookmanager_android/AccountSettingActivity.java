@@ -31,7 +31,6 @@ public class AccountSettingActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
-
             case R.id.close_button:
                 finish();
                 break;
@@ -72,7 +71,8 @@ public class AccountSettingActivity extends Activity {
         alertDialog.setPositiveButton(R.string.ok_button,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface daialg, int which) {
-                        finish();}
+                        finish();
+                    }
                 });
         alertDialog.show();
     }

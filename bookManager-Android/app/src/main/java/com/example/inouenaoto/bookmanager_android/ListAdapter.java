@@ -39,7 +39,7 @@ public class ListAdapter extends ArrayAdapter<CustomData> {
         ((TextView) convertView.findViewById(R.id.title))
                 .setText(item.getTitle());
         ((TextView) convertView.findViewById(R.id.price))
-                .setText(item.getPrice());
+                .setText(item.getPrice() + item.getPriceAndTax());
         ((TextView) convertView.findViewById(R.id.date))
                 .setText(item.getDate());
         return convertView;

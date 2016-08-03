@@ -20,19 +20,13 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-
-
-import android.widget.TimePicker;
-import android.widget.Toast;
-
 import java.io.InputStream;
 
 public class BookAddActivity extends Activity {
 
-    // 日付設定ダイアログのインスタンスを格納する変数
-    private DatePickerDialog.OnDateSetListener DateSetListener;
     private static final int REQUEST_GALLERY = 0;
     public EditText mSetDateText;
+    PickerSetting pickerSetting = new PickerSetting();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +35,12 @@ public class BookAddActivity extends Activity {
         setTitle(R.string.book_add_title);
 
         mSetDateText = (EditText) findViewById(R.id.add_book_date);
-        mSetDateText.setOnClickListener(new SetDateTextAction());
+        mSetDateText.setOnClickListener (new View.OnClickListener(){
+            @Override
+            public void onClick(final View v) {
+                pickerSetting.pickerAppear(BookAddActivity. this,mSetDateText);
+            }
+        });
 
         //画像添付ボタンの処理
         findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
@@ -55,15 +54,6 @@ public class BookAddActivity extends Activity {
         });
     }
 
-    //ピッカーのデータを取得しエディットテキストに反映させるためのクラス
-    PickerSetting pickerSetting = new PickerSetting();
-    public class SetDateTextAction implements View.OnClickListener {
-        @Override
-        public void onClick(final View v) {
-            pickerSetting.pickerAppear(BookAddActivity.this,mSetDateText);
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_menu, menu);
@@ -73,7 +63,6 @@ public class BookAddActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.close_button:
                 finish();
                 break;
@@ -93,10 +82,10 @@ public class BookAddActivity extends Activity {
         if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
             try {
                 InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                Bitmap img = BitmapFactory.decodeStream(inputStream);
+                Bitmap bookImage = BitmapFactory.decodeStream(inputStream);
                 inputStream.close();
                 // 選択した画像を表示
-                bookImageView.setImageBitmap(img);
+                bookImageView.setImageBitmap(bookImage);
             } catch (Exception e) {
 
             }
@@ -106,12 +95,13 @@ public class BookAddActivity extends Activity {
     public void addBook(){
         //書籍追加の処理
         EditText bookTitle = (EditText) findViewById(R.id.add_book_title);
-        final String addBookTitle = bookTitle.getText().toString();
+        String addBookTitle = bookTitle.getText().toString();
 
         EditText bookPrice = (EditText) findViewById(R.id.add_book_price);
-        final String addBookPrice = bookPrice.getText().toString();
+        String addBookPrice = bookPrice.getText().toString();
+
         EditText bookDate = (EditText) findViewById(R.id.add_book_date);
-        final String addBookDate = bookDate.getText().toString();
+        String addBookDate = bookDate.getText().toString();
 
         if (addBookTitle.length() == 0 || addBookPrice.length() == 0 || addBookDate.length() == 0) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(BookAddActivity.this);
@@ -119,7 +109,6 @@ public class BookAddActivity extends Activity {
             alertDialog.setPositiveButton(R.string.confirm,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-
                         }
                     });
             alertDialog.show();

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="book_list_url">これ以上はデータがありません</string>
+    <string name="book_edit_url">これ以上はデータがありません</string>
+    <string name="book_add_url">これ以上はデータがありません</string>
+
+</resources>

@@ -13,6 +13,7 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
     private Fragment mFragment;
     private final Activity mActivity;
     private final String mTag;
+    private int mTabJudge;
 
     //コンストラクタ
     public TabListener(Activity activity, String tag, Class<T> clz) {
@@ -25,17 +26,12 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 
         if (mTag == "tag1") {
-            Fragment listFragment = new BookListFragment();
-            FragmentManager manager = mActivity.getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.container, listFragment);
-            transaction.commit();
+            mTabJudge = 1;
+            switchFragment(mTabJudge);
         } else if (mTag == "tag2") {
-            Fragment settingFragment = new SettingFragment();
-            FragmentManager manager = mActivity.getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.container, settingFragment);
-            transaction.commit();
+            mTabJudge = 2;
+            switchFragment(mTabJudge);
+
         }
     }
 
@@ -49,5 +45,19 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
 
     //選択されているタブが選択されたとき
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    }
+
+    public void switchFragment(int judgeNumber) {
+        Fragment fragment = new Fragment();
+        if(judgeNumber == 1) {
+            fragment = new BookListFragment();
+        }
+        else if(judgeNumber == 2) {
+            fragment = new SettingFragment();
+        }
+        FragmentManager manager = mActivity.getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
     }
 }

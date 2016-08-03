@@ -3,32 +3,23 @@ package com.example.inouenaoto.bookmanager_android;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
-import android.widget.Toast;
 
 import java.io.InputStream;
-
 
 public class BookEditFragment extends Fragment {
 
@@ -38,46 +29,53 @@ public class BookEditFragment extends Fragment {
     private  EditText mEditBookTitle;
     private  EditText mEditBookPrice;
     private  EditText mEditBookDate;
-
-
-    private static final int REQUEST_GALLERY = 0;
     private ImageView mBookImageView;
 
+    private static final int REQUEST_GALLERY = 0;
+    PickerSetting pickerSetting = new PickerSetting();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_book_edit, container, false);
 
         mEditBookDate = (EditText) view.findViewById(R.id.edit_book_date);
-        mEditBookDate.setOnClickListener(new SetDateTextAction());
+        mEditBookDate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(final View v) {
+                pickerSetting.pickerAppear(getActivity(),mEditBookDate);
+            }
+        });
 
         //一覧画面から受け取った値をそれぞれのエデットテキストに反映
-        String title = getArguments().getString("titleText");
-        String price = getArguments().getString("priceText");
-        String date = getArguments().getString("dateText");
+        Bundle bundle = getArguments();
 
-        mBookId=getArguments().getString("bookId");
-
-        int image = getArguments().getInt("image");
-        Bitmap imaged=BitmapFactory.decodeResource(
+        mBookId=bundle.getString("bookId");
+        String title = bundle.getString("titleText");
+        String price = bundle.getString("priceText");
+        String date = bundle.getString("dateText");
+        int image = bundle.getInt("bookImage");
+        Log.d("image ",Integer.toString(image));
+        Bitmap imaged = BitmapFactory.decodeResource(
                 getResources(),
                 image);
 
+        Log.d("image ",mBookId);
+        String string = "yeah";
+        Log.d("onCreateView:",string);
+
         mEditBookTitle = (EditText) view.findViewById(R.id.edit_book_title);
         mEditBookPrice = (EditText) view.findViewById(R.id.edit_book_price);
-
-        ImageView editImage = (ImageView)  view.findViewById(R.id.book_image);
+        mBookImageView = (ImageView) view.findViewById(R.id.book_image);
 
         mEditBookTitle.setText(title);
         mEditBookPrice.setText(price);
         mEditBookDate.setText(date);
-        editImage.setImageBitmap(imaged);
+        mBookImageView.setImageBitmap(imaged);
 
         //画像添付ボタンの処理
         view.findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBookImageView=(ImageView) v.findViewById(R.id.book_image);
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -85,14 +83,6 @@ public class BookEditFragment extends Fragment {
             }
         });
         return view;
-    }
-
-    PickerSetting pickerSetting = new PickerSetting();
-    public class SetDateTextAction implements View.OnClickListener {
-        @Override
-        public void onClick(final View v) {
-            pickerSetting.pickerAppear(getActivity(),mEditBookDate);
-        }
     }
 
     //アクションバーの設定
@@ -113,7 +103,6 @@ public class BookEditFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
-
             case R.id.close_button:
                 BookListFragment bookListFragment = new BookListFragment();
                 FragmentManager manager = this.getFragmentManager();
@@ -148,7 +137,7 @@ public class BookEditFragment extends Fragment {
     }
 
     public  void saveAccount(){
-        final String titleText =mEditBookTitle.getText().toString();
+        final String titleText = mEditBookTitle.getText().toString();
         final String priceText = mEditBookPrice.getText().toString();
         final String dateText = mEditBookDate.getText().toString();
 

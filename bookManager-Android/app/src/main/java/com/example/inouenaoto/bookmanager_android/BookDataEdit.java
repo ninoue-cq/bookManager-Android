@@ -10,9 +10,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by inouenaoto on 2016/07/28.
- */
 public class BookDataEdit extends AsyncTask<String, Integer, String> {
     StringBuffer buffer;
     Context context;
@@ -27,7 +24,6 @@ public class BookDataEdit extends AsyncTask<String, Integer, String> {
         String mPrice = params[1];
         String mDate = params[2];
         String mBookId = params[3];
-
 
         HttpURLConnection connection = null;
         try {

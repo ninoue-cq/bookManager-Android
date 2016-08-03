@@ -96,8 +96,8 @@
                 android:textSize="@dimen/text_size"
                 android:layout_below="@+id/add_book_price"
                 android:layout_alignLeft="@+id/add_book_price"
-                android:layout_alignStart="@+id/add_book_price"
-                android:layout_marginTop="@dimen/text_field_interval" />
+                android:layout_alignStart="@+id/add_book_price"/>
+
             <EditText
                 android:layout_width="@dimen/edit_text_width"
                 android:layout_height="wrap_content"

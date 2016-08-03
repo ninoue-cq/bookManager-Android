@@ -44,7 +44,7 @@ import org.json.JSONObject;
 public class BookListFragment extends Fragment implements APIListener {
 
     private ListView mListView;
-    private int micons = R.mipmap.ic_launcher;
+    private int mIcons = R.mipmap.ic_launcher;
 
     private ArrayList<CustomData> mObjects;
 
@@ -52,7 +52,6 @@ public class BookListFragment extends Fragment implements APIListener {
     public int ONCE_READCOUNT=5;
 
     private JSONArray mJsonArray;
-    public String mPriceAndTax;//セルの 〜円＋税 の部分
     public BookListFragment() {
     }
 
@@ -68,8 +67,6 @@ public class BookListFragment extends Fragment implements APIListener {
         mObjects = new ArrayList<>();
 
         final BookListFragment thisFragment = this;
-        mPriceAndTax = getString(R.string.price_and_tax);
-        Log.d("tax",mPriceAndTax);
 
         //書籍一覧のデータの取得
         BookListGet bookListGet = new BookListGet();
@@ -102,12 +99,12 @@ public class BookListFragment extends Fragment implements APIListener {
                 CustomData customData = (CustomData) listView.getItemAtPosition(position);
 
                 Bundle bundle = new Bundle();
-                bundle.putString("titleText", customData.getTitle());
-                bundle.putString("priceText", customData.getPrice());
-                bundle.putString("dateText", customData.getDate());
                 bundle.putString("bookId", customData.getId());
-                bundle.putInt("image", micons);
-
+                bundle.putString("titleText",customData.getTitle());
+                bundle.putString("priceText",customData.getPrice());
+                bundle.putString("dateText",customData.getDate());
+                bundle.putInt("bookImage",R.mipmap.ic_launcher);
+               //値を書き込む
                 bookEditFragment.setArguments(bundle);
                 transaction.replace(R.id.container, bookEditFragment).commit();
             }
@@ -167,11 +164,12 @@ public class BookListFragment extends Fragment implements APIListener {
 
                 item.setId(id);
                 item.setTitle(title);
-                item.setPrice(price + mPriceAndTax);
+                item.setPrice(price);
+                item.setPriceAndTax(getString(R.string.price_and_tax));
                 item.setDate(formatedDate);
                 item.setIcon(BitmapFactory.decodeResource(
                         getResources(),
-                        micons
+                        mIcons
                 ));
                 mObjects.add(item);
             }
